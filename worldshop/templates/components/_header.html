@@ -1,0 +1,101 @@
+{% load i18n %}
+<header class="header">
+    <div class="container">
+        <div class="header-wrap">
+            <div class="header-text">
+                <h1 class="header-text__title">{% trans 'Скорей открой свой магазин' %}</h1>
+                <p class="header-text__subtitle">{% trans 'площадка для продажи' %}</p>
+            </div>
+            {% if 'search-select=products' in request.get_full_path or 'search_by_products' in request.get_full_path %}
+            <div class="header-wrap__search">
+                <form method="get" action="{% url 'search_by_products' %}" class="header-search" autocomplete="on">
+                    <div class="header-search__relative">
+                        <input
+                                value=""
+                                name="p"
+                                class="header-search__field"
+                                type="search"
+                                id="search__field"
+                                placeholder="{% trans 'Что вы ищите?' %}"
+                                oninput="if(this.value) {document.querySelector('.search-icon').style.display = 'block'
+                                             document.querySelector('.search-filter').style.display = 'none'}
+                                             else{document.querySelector('.search-icon').style.display = 'none'
+                                             document.querySelector('.search-filter').style.display = 'block'}">
+                        <button type="submit" class="header-search__btn search-icon"><i
+                                class="fa fa-solid fa-magnifying-glass" aria-hidden="true"></i></button>
+                        <button type="button" class="header-search__btn search-filter search_btn">
+                            <i class="fa-solid fa-arrow-up-wide-short"></i>
+                        </button>
+                    </div>
+                </form>
+                        <details class="header-filter header-filter__two_choose">
+                            <summary class="header-filter__summary">{% trans "По товарам" %}</summary>
+
+                             <a class="header-filter__link header-filter__two_choose__link"
+                                href="/?search-select=online_shops">
+                                 {% trans "По магазинам" %}
+                             </a>
+
+                        </details>
+            </div>
+
+            {% else %}
+            <div class="header-wrap__search">
+                <form method="get" action="{% url 'search' %}" class="header-search" autocomplete="on">
+                    <div class="header-search__relative">
+                        <input
+                                value=""
+                                name="q"
+                                class="header-search__field"
+                                type="search"
+                                id="search__field"
+                                placeholder="{% trans 'Что вы ищите?' %}"
+                                oninput="if(this.value) {document.querySelector('.search-icon2').style.display = 'block'
+                  document.querySelector('.search-filter2').style.display = 'none'}
+                  else{document.querySelector('.search-icon2').style.display = 'none'
+                  document.querySelector('.search-filter2').style.display = 'block'}">
+                        <button type="submit" class="header-search__btn search-icon2">
+                            <i class="fa fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                        </button>
+                        <button type="button" class="header-search__btn search-filter2 search_btn">
+                            <i class="fa-solid fa-arrow-up-wide-short"></i>
+                        </button>
+                    </div>
+                </form>
+                    <details class="header-filter header-filter__two_choose">
+                        <summary class="header-filter__summary">{% trans "По магазинам" %}</summary>
+
+                           <a class="header-filter__link header-filter__two_choose__link"
+                              href="/?search-select=products">{% trans "По товарам" %}</a>
+
+                    </details>
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+    {% include 'components/_header-categories.html' %}
+</header>
+
+{% block script %}
+<script>
+      // SEARCHER
+  form = document.querySelector(".header-search");
+  search = document.querySelector(".header-search__field");
+
+  form.onsubmit = function (e) {
+    if (search.value == "") {
+      search.classList.add("error");
+      search.placeholder = "Введите что-нибудь";
+      e.preventDefault();
+    }
+  }
+
+  search.oninput = function(){
+    search.classList.remove("error");
+  }
+
+  // SEARCHER
+
+</script>
+{% endblock script %}

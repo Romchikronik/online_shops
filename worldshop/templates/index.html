@@ -1,0 +1,65 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+        {% endblock title %}
+    </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="img/png" href="favicon.ico"/>
+    <link rel="stylesheet" href="{% static 'worldstore/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'worldstore/css/bootstrap-grid.min.css' %}">
+    {% block style_anim %}
+    {% endblock style_anim %}
+    <link rel="stylesheet" href="{% static 'worldstore/css/style.min.css' %}">
+    {% block style %}
+    {% endblock style %}
+</head>
+<body>
+
+{% block navbar %}
+{% include 'components/_navbar.html' %}
+{% endblock navbar %}
+
+{% block header %}
+{% include 'components/_header.html' %}
+{% endblock header %}
+
+<main>
+    {% block main %}
+    {% endblock main %}
+</main>
+
+{% block footer %}
+{% include 'layout/footer.html' %}
+{% endblock footer %}
+
+{% block mobile_navbar %}
+{% include 'components/_mobile_navbar.html' %}
+{% endblock mobile_navbar %}
+
+{% block modal %}
+{% endblock modal %}
+
+{% include 'components/_delete_shop_form.html' %}
+
+<script src="{% static 'worldstore/js/jquery-3.5.1.min.js' %}"></script>
+<script src="{% static 'worldstore/js/jquery.waypoints.min.js' %}"></script>
+<script src="https://kit.fontawesome.com/f2f2c2a4b3.js" crossorigin="anonymous"></script>
+<script src="{% static 'worldstore/js/jquery.cookie.js' %}"></script>
+{% block s_script %}
+{% endblock s_script %}
+<script src="{% static 'worldstore/js/script.js' %}"></script>
+<script src="{% static 'worldstore/js/favicon.js' %}"></script>
+{% block script %}
+{% endblock script %}
+</body>
+</html>

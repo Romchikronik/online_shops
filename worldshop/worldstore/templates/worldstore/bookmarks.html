@@ -1,0 +1,109 @@
+{% extends 'index.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'worldstore/css/shop_profile.min.css' %}">
+{% endblock style %}
+
+{% block header %}
+{% endblock header %}
+
+
+{% block main %}
+<style>
+    @media (max-width: 540px){
+        .tabs-wrap{
+            padding-top: 0;
+        }
+    }
+</style>
+<!--  style="padding-top: 90px; @media (max-width: 575px){padding-top: 40px;}"   -->
+<section style="padding-top: 40px; padding-bottom: 50px;">
+    <div class="tabs-wrap">
+        <div class="container">
+            <div class="row">
+        <!-- BLOCKS GUARANTEES START -->
+        {% if request.session.favorites %}
+            {% for online_shop in online_shops %}
+                {% for online_shop_s in page_obj %}
+<!--                    {{ online_shop_s.id }}-->
+                    {% if online_shop.id == online_shop_s.id|add:"0" %}
+                    {% include 'worldstore/components/_shop_card.html' %}
+<!--                    <div>{{ request.session.keys }}</div>-->
+<!--                    <div>{{ request.session.favorites }}</div>-->
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        {% else %}
+                {% trans 'У вас пока нет сохраненных объявлений' %}
+        {% endif %}
+        <!-- BLOCK EMAIL FORM END -->
+            </div>
+        </div>
+    </div>
+
+     {% include 'worldstore/components/_pagination.html' %}
+</section>
+
+{% endblock main %}
+
+
+{% block footer %}
+{% endblock footer %}
+
+
+{% block mobile_navbar %}
+<div class="wrap-mobile_fixed_menu">
+    <menu class="mobile_fixed_menu">
+        <a href="{% url 'index' %}" class="menu__item">  <!--menu__item_active-->
+            <div class="menu__icon">
+                <svg class="icon" viewBox="0 0 576 512">
+                    <path d="M575.8 255.5C575.8 273.5 560.8 287.6 543.8 287.6H511.8L512.5 447.7C512.5 450.5 512.3 453.1 512 455.8V472C512 494.1 494.1 512 472 512H456C454.9 512 453.8 511.1 452.7 511.9C451.3 511.1 449.9 512 448.5 512H392C369.9 512 352 494.1 352 472V384C352 366.3 337.7 352 320 352H256C238.3 352 224 366.3 224 384V472C224 494.1 206.1 512 184 512H128.1C126.6 512 125.1 511.9 123.6 511.8C122.4 511.9 121.2 512 120 512H104C81.91 512 64 494.1 64 472V360C64 359.1 64.03 358.1 64.09 357.2V287.6H32.05C14.02 287.6 0 273.5 0 255.5C0 246.5 3.004 238.5 10.01 231.5L266.4 8.016C273.4 1.002 281.4 0 288.4 0C295.4 0 303.4 2.004 309.5 7.014L564.8 231.5C572.8 238.5 576.9 246.5 575.8 255.5L575.8 255.5z"/>
+                </svg>
+            </div>
+            <strong class="menu__text">{% trans 'Главная' %}</strong>   <!--menu__item_active-->
+        </a>
+
+        <a href="{% if request.user.is_authenticated and request.user.onlineshop %}
+        {% url 'online_shop_detail' user.onlineshop.pk user.onlineshop.slug %}
+        {% elif request.user.is_authenticated and not request.user.onlineshop %}
+        {% url 'create_profile' %}
+        {% else %}
+        {% url 'login_registration' %}
+        {% endif %}" class="menu__item">
+            <div class="menu__icon">
+
+                <svg class="icon" viewBox="0 0 448 512">
+                    <path d="M272 304h-96C78.8 304 0 382.8 0 480c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32C448 382.8 369.2 304 272 304zM48.99 464C56.89 400.9 110.8 352 176 352h96c65.16 0 119.1 48.95 127 112H48.99zM224 256c70.69 0 128-57.31 128-128c0-70.69-57.31-128-128-128S96 57.31 96 128C96 198.7 153.3 256 224 256zM224 48c44.11 0 80 35.89 80 80c0 44.11-35.89 80-80 80S144 172.1 144 128C144 83.89 179.9 48 224 48z"/>
+                </svg>
+
+            </div>
+            <strong class="menu__text">{% trans 'Профиль' %}</strong>
+        </a>
+
+        <!--        <a class="menu__item">-->
+        <!--            <div class="menu__icon">-->
+        <!--                <svg class="icon" viewBox="0 0 448 512">-->
+        <!--                    <path d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z"/>-->
+        <!--                </svg>-->
+
+        <!--            </div>-->
+        <!--            <strong class="menu__text">Настройки</strong>-->
+        <!--        </a>-->
+
+        <a href="{% url 'bookmarks' %}" class="menu__item menu__item_active">
+            <div class="menu__icon">
+                <svg class="icon" viewBox="0 0 384 512">
+                    <path d="M336 0h-288C21.49 0 0 21.49 0 48v431.9c0 24.7 26.79 40.08 48.12 27.64L192 423.6l143.9 83.93C357.2 519.1 384 504.6 384 479.9V48C384 21.49 362.5 0 336 0zM336 452L192 368l-144 84V54C48 50.63 50.63 48 53.1 48h276C333.4 48 336 50.63 336 54V452z"/>
+                </svg>
+            </div>
+            <strong class="menu__text menu__item_active">{% trans 'Избранное' %}</strong>
+        </a>
+    </menu>
+</div>
+{% endblock mobile_navbar %}

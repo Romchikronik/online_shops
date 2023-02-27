@@ -1,0 +1,133 @@
+{% load i18n %}
+
+{% if form.errors %}
+<style>
+    @media screen and (max-width: 991px){
+        .form-errors{
+             width: 72%;
+             top: 3% !important;
+        }
+    }
+
+    @media screen and (max-width: 767px){
+        .form-errors{
+             width: 90%;
+             top: 0 !important;
+             font-size: 13px !important;
+        }
+    }
+
+    @media screen and (max-width: 540px){
+        .form-errors{
+             width: 90%;
+             top: 9% !important;
+             font-size: 11px !important;
+        }
+        .header-info__form {
+            top: 340px;
+         }
+    }
+
+    @media screen and (max-width: 440px){
+        .form-errors{
+             width: 90%;
+             top: 9% !important;
+             font-size: 10px !important;
+        }
+        .header-info__form {
+            top: 340px;
+        }
+        .alert-error{
+            padding: 2px !important;
+        }
+        .space{
+            padding-bottom: 290px !important;
+        }
+    }
+
+</style>
+{% endif %}
+
+<header class="header">
+    {% if form.errors %}
+    <div class="form-errors" style="z-index: 15; top: 5%; display: flex;
+                                justify-content: flex-start; align-items: center;
+                                color: white; flex-wrap: wrap;
+                                font-size: 14px; text-align: left;">
+        {% for field in form %}
+        {% for error in field.errors %}
+        <div class="alert alert-error" style="background: red; width: 100%;
+             padding-left: 15px;  padding-top: 5px; padding-bottom: 5px;" role="alert">
+            {% trans 'Произошла ошибка:' %} {{ error }}
+        </div>
+        {% endfor %}
+        {% endfor %}
+
+        {% for error in form.non_field_errors %}
+        <div class="alert alert-error" role="alert">
+            {% trans 'Произошла ошибка:' %} {{ error }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <div class="header-mobile-background">
+        <!-- <img class="header-mobile-img" src="img/home_example.png" alt=""> -->
+        <div class="container">
+            <div class="header-wrap header-profilewrap">
+                <div class="header-top header-top-form">
+                </div>
+                <div class="header-info">
+                    <form action="" class="header-info__form" enctype="multipart/form-data" method="POST">
+                        {% csrf_token %}
+
+                        <div class="header-info__photo-load">
+
+                            <!--                                <div class="header-info__label">-->
+                            <!--                                    <i class="fa-solid fa-camera"></i>-->
+                            <!--                                </div>-->
+                            {% if form.initial.photo %}
+                            <img id="profile_image" class="prof_photo header-info__label"
+                                 src="{{ form.initial.photo.url }}">
+                            {% else %}
+                            <img id="profile_image" class="prof_photo header-info__label" src="">
+                            {% endif %}
+                            <div style="font-size: 0;" class="input_file header-info__file">
+                                {{ form.photo }}
+                                <div class="fake_file"><input type="text" placeholder="Загрузите фото"
+                                                              class="fake_file_input"> <input type="button"
+                                                                                              value="Загрузить фото">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="header-info__fone">
+                            <div style="font-size: 0;" class="input_file header-info__file">
+                                {{ form.bg }}
+                                <div class="fake_file"><input type="text" placeholder="Добавьте фон"
+                                                              class="fake_file_input"> <input type="button"
+                                                                                              value="Добавить фон">
+                                </div>
+                            </div>
+                        </div>
+                        {{ form.title }}
+                        {{ form.category }}
+                        {{ form.region }}
+                        <p class="header-info__subtitle">{% trans 'Средства связи' %}</p>
+                        {{ form.phone_number }}
+                        {{ form.tg }}
+                        {{ form.insta }}
+                        <button type="submit" class="header-info__send">
+                            {% if 'update' in request.path %}
+                            {% trans 'Сохранить изменения' %}
+                            {% else %}
+                            {% trans 'Создать магазин' %}
+                            {% endif %}
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="space">
+</div>

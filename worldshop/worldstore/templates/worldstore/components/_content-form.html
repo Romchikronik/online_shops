@@ -1,0 +1,12 @@
+{% load i18n %}
+<h3 class="about__title">{% trans 'О нас' %}</h3>
+
+{% for message in messages %}
+<div class="message {{ message.tags }}">{{ message }}</div>
+{% endfor %}
+
+<form action="{% url 'save_description' online_shop.pk online_shop.slug %}" class="about__form" method="POST">
+    {% csrf_token %}
+    {{ content_form.content }}
+    <button class="about__btn">{% trans 'Сохранить' %}</button>
+</form>

@@ -1,0 +1,410 @@
+{% extends 'index.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block style_anim %}
+<link rel="stylesheet" href="{% static 'worldstore/css/jquery.fancybox.min.css' %}">
+{% endblock style_anim %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'worldstore/css/shop_profile.min.css' %}">
+<link rel="stylesheet" href="{% static 'worldstore/css/product_detail.min.css' %}">
+{% endblock style %}
+
+{% block header %}
+{% endblock header %}
+
+{% block main %}
+{% if form.errors %}
+<style>
+    .product-form{
+        padding-top: 130px;
+    }
+
+    @media screen and (max-width: 1199px){
+        .form-errors{
+             width: 60%;
+             top: 6.8% !important;
+        }
+    }
+
+    @media screen and (max-width: 991px){
+        .form-errors{
+             width: 80%;
+             top: 6% !important;
+        }
+        .product-form{
+           padding-top: 120px;
+        }
+    }
+
+    @media screen and (max-width: 540px){
+        .form-errors{
+             width: 85%;
+             top: 6% !important;
+        }
+        .product-form{
+           padding-top: 70px;
+        }
+    }
+
+</style>
+{% endif %}
+<div class="container">
+        {% if form.errors %}
+
+    <div class="form-errors" style="z-index: 15; top: 10%; display: flex;
+                                justify-content: flex-start; align-items: center;
+                                color: red; flex-wrap: wrap;
+                                font-size: 14px; text-align: left; background: rgba(255, 0, 0, 0.15);
+                                 ">
+        {% for field in form %}
+        {% for error in field.errors %}
+        <div class="alert alert-error" style="background: transparent; width: 100%;
+             padding-left: 15px;  padding-top: 5px; padding-bottom: 5px;" role="alert">
+            {% trans 'Произошла ошибка:' %} {{ error }}
+        </div>
+        {% endfor %}
+        {% endfor %}
+
+        {% for error in form.non_field_errors %}
+        <div class="alert alert-error" role="alert">
+            {% trans 'Произошла ошибка:' %} {{ error }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <form action="{{ online_shop.get_absolute_url }}" class="product-form" enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+
+        <div class="product-form__files">
+            <div class="product-form__image">
+                {% if not 'create_product' in request.path %}
+                <div class="slider slider_product_form" style="width: 100%;">  <!--slider-form-->
+                    <div class="inner" id="inner">
+                        {% for image in product_images %}
+                        <!--                            <img class="slider__img {% if forloop.counter0 == 0 %}active{% endif %}" src="{{ image.get_image_url }}" alt="">-->
+                        <div class="inner__wrap slider__img {% if forloop.counter0 == 0 %}active{% endif %}">
+                            <a data-fancybox="slide" href="{{ image.get_image_url }}">
+                                <img src="{{ image.get_image_url }}" alt="">
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% if images_length != 1 %}
+                    <div class="arrows">
+                        <button type="button" class="left slider__btn"><i class="fa-solid fa-chevron-left"></i></button>
+                        <button type="button" class="right slider__btn"><i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    <ul class="indicators" id="indicators">
+                        {% for image in product_images %}
+                        <li class="{% if forloop.counter0 == 0 %}active-li{% endif %} slider_li"
+                            data-slide="{{ forloop.counter0 }}"></li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+                {% else %}
+
+                <div class="slider slider_product_form" style="width: 100%;">  <!--slider-form-->
+                    <div class="inner" id="inner">
+                    </div>
+                    <div class="arrows">
+                        <button type="button" class="left slider__btn"><i class="fa-solid fa-chevron-left"></i></button>
+                        <button type="button" class="right slider__btn"><i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    <ul class="indicators" id="indicators">
+                    </ul>
+                </div>
+                <!--                <img src="{{ image.get_image_url }}" class="product-img product-form__img-text" alt="Вы можете загрузить до 5 картинок">-->
+                <!--                <img src="{{ form.initial.images.url }}" class="product-img product-form__img-text" alt="Вы можете загрузить до 5 картинок">-->
+                {% endif %}
+            </div>
+
+            {% if form.images.errors %}
+            {{ form.images.errors }}
+            {% endif %}
+            <div class="input_file">
+                {{ form.images }}
+                <div class="fake_file"><input type="text"
+                                              placeholder="{% if not 'create_product' in request.path %}Изменить картинки{% else %}Загрузите файл{% endif %}"
+                                              class="fake_file_input"> <input
+                        type="button" id="file_modal"
+                        value="{% if not 'create_product' in request.path %}Изменить картинки{% else %}Загрузить файл{% endif %}">
+                </div>
+            </div>
+            <!--            <p id="num-of-files">Ни один файл не выбран</p>-->
+        </div>
+
+        <div class="product-form__allfields">
+            {% for message in messages %}
+            <div style="background: rgba(255, 0, 0, 0.15); color: red; border-radius: 5px; margin-bottom: 5px;" class="message {{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+            <div class="product-form__wrap">
+                <p class="product-form__label"><label for="{{ form.title.id_for_label }}">{% trans 'Название' %}</label></p>
+                {{ form.title }}
+            </div>
+            <div class="product-form__wrap">
+                <p class="product-form__label"><label for="{{ form.price.id_for_label }}">{% trans 'Цена (сум)' %}</label></p>
+                {{ form.price }}
+            </div>
+            <div class="product-form__wrap">
+                <p class="product-form__label"><label for="{{ form.phone_number.id_for_label }}">{% trans 'Ваш номер' %}</label></p>
+                {{ form.phone_number }}
+            </div>
+            <div class="product-form__wrap">
+                <p class="product-form__label"><label for="{{ form.deliver.id_for_label }}">{% trans 'Опишите доставку' %}</label></p>
+                {{ form.deliver }}
+            </div>
+            <div class="product-form__wrap product-form__textarea">
+                <p class="product-form__label"><label for="{{ form.desc.id_for_label }}">{% trans 'Описание' %}</label></p>
+                {{ form.desc }}
+            </div>
+            <button type="submit" class="product-form__submit">
+                {% if 'update' in request.path %}
+                {% trans 'Сохранить изменения' %}
+                {% else %}
+                {% trans 'Активировать' %}
+                {% endif %}
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock main %}
+
+{% block footer %}
+<footer class="footer form-footer">
+    <div class="container footer__container">
+        <h2 class="footer__title">{% trans 'Ваш бизнес начинается здесь!!!' %}</h2>
+        <p class="footer__subtitle">{% trans 'Связаться с нами' %}</p>
+        <ul class="footer-contacts">
+            <li class="footer-contacts__item">
+                <a href="tel:+998901111329" class="number">
+                    +998901111329
+                </a>
+            </li>
+            <li class="footer-contacts__item">
+                <a href="mailto:rkolesov465@gmail.com">rkolesov465@gmail.com</a>
+            </li>
+        </ul>
+        <ul class="footer-web">
+            <li><a class="footer-web__link" href=""><i class="fa-brands fa-telegram"></i></a></li>
+            <li><a class="footer-web__link" href=""><i class="fa-brands fa-facebook"></i></a></li>
+            <li><a class="footer-web__link" href=""><i class="fa-brands fa-instagram"></i></a></li>
+        </ul>
+    </div>
+</footer>
+
+<nav class="footer-nav">
+    <div class="container">
+        <p class="footer-nav__copy">2022 Dream Team. {% trans 'Все права защищены.' %}</p>
+    </div>
+</nav>
+{% endblock %}
+
+{% block modal %}
+<!--<div class="overlay"></div>-->
+
+<!-- <div class="delete-product">-->
+<!--      {% for image in product_images %}-->
+
+<!--        <form class="{% if forloop.counter0 == 0 %}active{% endif %}" method="POST" action="" enctype="multipart/form-data">-->
+<!--            {% csrf_token %}-->
+
+<!--            <p class="delete-product__text">-->
+<!--                Вы действитьно хотите удалить эту картинку "{{ image.pk }}" ?-->
+
+<!--            </p>-->
+<!--            <input type="submit" value="Да, удалить" class="delete-product__btn">-->
+<!--        </form>-->
+<!--     {% endfor %}-->
+<!-- </div>-->
+{% endblock %}
+
+{% block s_script %}
+{% if not 'create_product' in request.path %}
+<script src="{% static 'worldstore/js/jquery.fancybox.min.js' %}"></script>
+{% endif %}
+{% endblock s_script %}
+
+{% block script %}
+{% if not 'create_product' in request.path %}
+<script>
+
+$("#fileMulti").click(function(e){
+    answer = confirm("Если вы загрузите новые картинки, то все картинки загруженные до этого будут удалены. Вы точно хотите это сделать?");
+    if(answer === false){
+        e.preventDefault();
+    }else{
+        $('.slider__img').remove();
+        $('.slider_li').remove();
+   }
+});
+
+function readURL(input){
+        if (input.files && input.files[0]){
+           for(i=0; i < input.files.length;i++)
+           {
+            let oImg=document.createElement("img");
+            $('<li class="slider_li"></li>').attr('data-slide', i).appendTo('#indicators');
+            if (i === 0){
+               oImg.classList.add('active');
+               $('.slider_li').addClass('active-li');
+            }
+
+            for(let i = 0; i < $('.slider_li').length; i++){
+            $('.slider_li')[i].onclick = function(){
+                for(let j = 0; j < $('.slider_li').length; j++){
+                $('.slider_li')[j].classList.remove('active-li');
+                $('.slider__img')[j].classList.remove('active');
+                $('.slider__img').hide();
+            }
+            $(this).addClass('active-li');
+            let slide = $(this).attr('data-slide');
+            $('.slider__img')[slide].classList.add('active');
+            i = slide;
+            }
+            }
+
+            let reader = new FileReader();
+            reader.onload = function (e) {
+               oImg.classList.add('slider__img');
+               oImg.setAttribute('src', e.target.result);
+               document.getElementById("inner").appendChild(oImg);
+            }
+            reader.readAsDataURL(input.files[i]);
+           }
+        }
+      }
+
+    $("#fileMulti").change(function(){
+        readURL(this);
+    });
+
+  $('img.active').show();
+  $('.right').click(function(){
+    var activeImgIndex = $('.active').index();
+    $('.active').hide().removeClass('active');
+    $('.active-li').removeClass('active-li');
+    if(activeImgIndex == $('.slider__img:last').index()){
+        $('.slider__img').eq(0).show().addClass('active');
+        $('.slider_li').eq(0).addClass('active-li');
+    }
+    else{
+      $('.slider__img').eq(activeImgIndex + 1).show().addClass('active');
+      $('.slider_li').eq(activeImgIndex + 1).addClass('active-li');
+    }
+  })
+  $('.left').click(function(){
+    var activeImgIndex = $('.active').index();
+    $('.active').hide().removeClass('active');
+    $('.active-li').removeClass('active-li');
+    if(activeImgIndex == $('.slider__img:first').index()){
+        $('.slider__img').eq($('.slider__img').length - 1).show().addClass('active');
+        $('.slider_li').eq($('.slider__img').length - 1).addClass('active-li');
+    }
+    else{
+      $('.slider__img').eq(activeImgIndex - 1).show().addClass('active');
+      $('.slider_li').eq(activeImgIndex - 1).addClass('active-li');
+    }
+  })
+
+</script>
+{% endif %}
+{% if 'create_product' in request.path %}
+
+<script>
+      function readURL(input)
+      {
+        if (input.files && input.files[0])
+        {
+           for(i=0; i < input.files.length;i++)
+           {
+            let oImg=document.createElement("img");
+            $('<li class="slider_li"></li>').attr('data-slide', i).appendTo('#indicators');
+            if (i === 0){
+               oImg.classList.add('active');
+               $('.slider_li').addClass('active-li');
+            }
+
+            for(let i = 0; i < $('.slider_li').length; i++){
+            $('.slider_li')[i].onclick = function(){
+                for(let j = 0; j < $('.slider_li').length; j++){
+                $('.slider_li')[j].classList.remove('active-li');
+                $('.slider__img')[j].classList.remove('active');
+                $('.slider__img').hide();
+            }
+            $(this).addClass('active-li');
+            let slide = $(this).attr('data-slide');
+            $('.slider__img')[slide].classList.add('active');
+            i = slide;
+            }
+            }
+
+            console.log(i);
+            let reader = new FileReader();
+            reader.onload = function (e) {
+               oImg.classList.add('slider__img');
+               oImg.setAttribute('src', e.target.result);
+               document.getElementById("inner").appendChild(oImg);
+            }
+            reader.readAsDataURL(input.files[i]);
+           }
+        }
+      }
+
+    $("#fileMulti").change(function(){
+        readURL(this);
+    });
+
+
+  $('img.active').show();
+  $('.right').click(function(){
+    var activeImgIndex = $('.active').index();
+    $('.active').hide().removeClass('active');
+    $('.active-li').removeClass('active-li');
+    if(activeImgIndex == $('.slider__img:last').index()){
+        $('.slider__img').eq(0).show().addClass('active');
+        $('.slider_li').eq(0).addClass('active-li');
+    }
+    else{
+      $('.slider__img').eq(activeImgIndex + 1).show().addClass('active');
+      $('.slider_li').eq(activeImgIndex + 1).addClass('active-li');
+    }
+  })
+  $('.left').click(function(){
+    var activeImgIndex = $('.active').index();
+    $('.active').hide().removeClass('active');
+    $('.active-li').removeClass('active-li');
+    if(activeImgIndex == $('.slider__img:first').index()){
+        $('.slider__img').eq($('.slider__img').length - 1).show().addClass('active');
+        $('.slider_li').eq($('.slider__img').length - 1).addClass('active-li');
+    }
+    else{
+      $('.slider__img').eq(activeImgIndex - 1).show().addClass('active');
+      $('.slider_li').eq(activeImgIndex - 1).addClass('active-li');
+    }
+  })
+
+  $("#fileMulti").click(function(){
+         $('.slider__img').remove();
+         $('.slider_li').remove();
+  });
+
+
+
+
+
+</script>
+
+{% endif %}
+{% if images_length != 1 and not 'create_product' in request.path %}
+<script src="{% static 'worldstore/js/slider.js' %}"></script>
+{% endif %}
+{% endblock script %}

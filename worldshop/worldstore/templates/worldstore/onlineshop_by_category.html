@@ -1,0 +1,61 @@
+{% extends 'index.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'worldstore/css/category_detail.min.css' %}">
+<link rel="stylesheet" href="{% static 'worldstore/css/shop_profile.min.css' %}">
+{% endblock style %}
+
+{% block header %}
+{% include 'worldstore/components/_category_header.html' %}
+{% endblock header %}
+
+{% block main %}
+
+<section class="list-cards list-cards_categories">
+    <div class="list-cards-wrap">
+        <h2 class="title">
+            {% if not 'search-select=products' in request.get_full_path %}
+            {% trans 'Онлайн магазины' %}
+            {% else %}
+            {% trans 'Товары' %}
+            {% endif %}
+        </h2>
+        <div class="container">
+            <div class="row">
+                {% if not 'search-select=products' in request.get_full_path %}
+                {% if online_shops %}
+                {% for online_shop in online_shops %}
+                {% if online_shop.product__count %}
+                {% include 'worldstore/components/_shop_card.html' %}
+                {% endif %}
+                {% endfor %}
+                {% else %}
+                <p style="margin: 0 auto;">{% trans 'В данной категории пока нет магазинов' %}</p>
+                {% endif %}
+                {% else %}
+                {% if products %}
+                {% for product in products %}
+                {% include 'worldstore/components/_product-card.html' %}
+                {% endfor %}
+                {% else %}
+                <p style="margin: 0 auto;">{% trans 'В данной категории пока нет продуктов' %}</p>
+                {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include 'worldstore/components/_pagination.html' %}
+
+{% endblock main %}
+
+{% block modal %}
+{% include 'worldstore/components/_modal-filter-form-categories.html' %}
+{% endblock modal %}

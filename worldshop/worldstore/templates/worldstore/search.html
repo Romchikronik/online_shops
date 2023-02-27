@@ -1,0 +1,227 @@
+{% extends 'index.html' %}
+{% load i18n %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block main %}
+<section class="list-cards">
+    <div class="list-cards-wrap">
+        <h2 class="title" style="font-size: 25px; line-height: 25px;">{% trans 'По вашему запросу найдено:' %}</h2>
+        <div class="container">
+            <div class="row">
+                {% if object_list %}
+                {% for object in object_list %}
+                {% if not object.title %}
+                {% if object.online_shop.product_set.all %}
+                <div class="col-xl-3 col-lg-4 col-md-5 col-sm-6 col-6">
+                    <div class="user-card">
+                        <a href="{{ object.online_shop.get_absolute_url }}" class="user-card-top">
+                            <div class="user-card-top__background">
+                                <img class="user-card-top__bgImg" src="{{ object.online_shop.get_bg_url }}" alt="">
+                                <div class="user-card-top__image-wrap">
+                                    <img class="user-card-top__image" src="{{ object.online_shop.get_image_url }}"
+                                         alt="">
+                                </div>
+                            </div>
+                        </a>
+                        <div class="user-card-down">
+                            <div class="user-card-down__text">
+                                <a href="{{ object.online_shop.get_absolute_url }}" class="user-card-down__title">
+                                    {{ object.online_shop.title }}
+                                </a>
+                                <p class="user-card-down__subtitle">{{ object.content|truncatewords:3 }}</p>
+                            </div>
+                            <div class="user-card-down__evaluation">
+                                <ul class="user-card-down__likes">
+                                    <li class="react__element" data-id="{{ object.online_shop.pk }}"
+                                        data-type="online_shop"
+                                        data-action="like"
+                                        title="Нравится">
+                                        <span class="count"
+                                              data-count="like">{{ object.online_shop.votes.likes.count }} </span>
+                                        <i class="fa fa-solid fa-thumbs-up"></i>
+                                    </li>
+                                    <li class="react__element" data-id="{{ object.online_shop.pk }}"
+                                        data-type="online_shop"
+                                        data-action="dislike"
+                                        title="Не нравится">
+                                        <span class="count"
+                                              data-count="dislike">{{ object.online_shop.votes.dislikes.count }}</span>
+                                        <i class="fa fa-solid fa-thumbs-up fa-rotate-180"></i>
+                                    </li>
+                                </ul>
+                                <div class="user-card-down__favorite">
+                                    <div data-id="{{ object.online_shop.pk }}" data-type="online_shop"
+                                         data-action="bookmark" title="Избранное" class="favorite-link">
+                                        <i class="fa-regular fa-bookmark"></i>
+                                        <!--                        <span data-count="bookmark">{{ online_shop.get_bookmark_count }}</span>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% elif object.desc %}
+
+                <div class="col-xl-3 col-lg-4 col-md-5 col-sm-6 col-6">
+                    <div class="user-card">
+                        <a href="{{ object.online_shop.get_absolute_url }}" class="user-card-top">
+                            <div class="user-card-top__background">
+                                <img class="user-card-top__bgImg" src="{{ object.online_shop.get_bg_url }}" alt="">
+                                <div class="user-card-top__image-wrap">
+                                    <img class="user-card-top__image" src="{{ object.online_shop.get_image_url }}"
+                                         alt="">
+                                </div>
+                            </div>
+                        </a>
+                        <div class="user-card-down">
+                            <div class="user-card-down__text">
+                                <a href="{{ object.online_shop.get_absolute_url }}" class="user-card-down__title">
+                                    {{ object.online_shop.title }}
+                                </a>
+                                <p class="user-card-down__subtitle">{{ object.online_shop.content.content|truncatewords:3 }}</p>
+                            </div>
+                            <div class="user-card-down__evaluation">
+                                <ul class="user-card-down__likes">
+                                    <li class="react__element" data-id="{{ object.online_shop.pk }}"
+                                        data-type="online_shop"
+                                        data-action="like"
+                                        title="Нравится">
+                                        <span class="count"
+                                              data-count="like">{{ object.online_shop.votes.likes.count }} </span>
+                                        <i class="fa fa-solid fa-thumbs-up"></i>
+                                    </li>
+                                    <li class="react__element" data-id="{{ object.online_shop.pk }}"
+                                        data-type="online_shop"
+                                        data-action="dislike"
+                                        title="Не нравится">
+                                        <span class="count"
+                                              data-count="dislike">{{ object.online_shop.votes.dislikes.count }}</span>
+                                        <i class="fa fa-solid fa-thumbs-up fa-rotate-180"></i>
+                                    </li>
+                                </ul>
+                                <div class="user-card-down__favorite">
+                                    <div data-id="{{ object.online_shop.pk }}" data-type="online_shop"
+                                         data-action="bookmark" title="Избранное" class="favorite-link">
+                                        <i class="fa-regular fa-bookmark"></i>
+                                        <!--                        <span data-count="bookmark">{{ online_shop.get_bookmark_count }}</span>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {% else %}
+                {% if object.product_set.all %}
+                <div class="col-xl-3 col-lg-4 col-md-5 col-sm-6 col-6">
+                    <div class="user-card">
+                        <a href="{{ object.get_absolute_url }}" class="user-card-top">
+                            <div class="user-card-top__background">
+                                <img class="user-card-top__bgImg" src="{{ object.get_bg_url }}" alt="">
+                                <div class="user-card-top__image-wrap">
+                                    <img class="user-card-top__image" src="{{ object.get_image_url }}" alt="">
+                                </div>
+                            </div>
+                        </a>
+                        <div class="user-card-down">
+                            <div class="user-card-down__text">
+                                <a href="{{ object.get_absolute_url }}" class="user-card-down__title">{{ object.title }}</a>
+                                <p class="user-card-down__subtitle">{{ object.content.content|truncatewords:3 }}</p>
+                            </div>
+                            <div class="user-card-down__evaluation">
+                                <ul class="user-card-down__likes">
+                                    <li class="react__element" data-id="{{ object.pk }}" data-type="online_shop"
+                                        data-action="like"
+                                        title="Нравится">
+                                        <span class="count"
+                                              data-count="like">{{ object.votes.likes.count }} </span>
+                                        <i class="fa fa-solid fa-thumbs-up"></i>
+                                    </li>
+                                    <li class="react__element" data-id="{{ object.pk }}" data-type="online_shop"
+                                        data-action="dislike"
+                                        title="Не нравится">
+                                        <span class="count"
+                                              data-count="dislike">{{ object.votes.dislikes.count }}</span>
+                                        <i class="fa fa-solid fa-thumbs-up fa-rotate-180"></i>
+                                    </li>
+                                </ul>
+                                <div class="user-card-down__favorite">
+                                    <div data-id="{{ object.pk }}" data-type="online_shop"
+                                         data-action="bookmark" title="Избранное" class="favorite-link">
+                                        <i class="fa-regular fa-bookmark"></i>
+                                        <!--                        <span data-count="bookmark">{{ online_shop.get_bookmark_count }}</span>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+                <!--  здесь была пагинация -->
+                {% else %}
+                <p>{% trans 'Не найдено публикаций по вашему запросу' %}<br>{% trans 'Попробуйте повторить запрос с другой формулировкой' %}</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+<!--    <h1>Поиск</h1>-->
+
+{% endblock main %}
+
+{% block modal %}
+{% include 'worldstore/components/_modal-filter-form.html' %}
+{% endblock modal %}
+
+{% block script %}
+<!--<script>-->
+<!--    $(document).ready(function () {-->
+<!--        let user_card_links = document.querySelectorAll(".user-card-top");-->
+<!--        let arr = []-->
+<!--        for(let i = 0; i < user_card_links.length; i++){-->
+<!--            href = user_card_links[i].getAttribute("href");-->
+<!--            arr.push(href);-->
+<!--        }-->
+<!--        let arr_set = new Set(arr);-->
+<!--        let new_arr = Array.from(arr_set);-->
+<!--        console.log(new_arr);-->
+
+<!--         for (let i = 0; i < arr.length; i++) {-->
+
+<!--              console.log(new_arr[i]);-->
+<!--              new_arr[i];-->
+<!--              user_card_links[i].parentElement.parentElement.remove();-->
+<!--              console.log(new_arr[i].propertyName);-->
+<!--         }-->
+
+<!--    });-->
+<!--</script>-->
+
+<!--<script>-->
+<!--    $(document).ready(function () {-->
+<!--         let user_card_links = document.querySelectorAll(".user-card-top");-->
+<!--         let arr = []-->
+<!--         for(let i = 0; i < user_card_links.length; i++){-->
+<!--            href = user_card_links[i].getAttribute("href");-->
+<!--            arr.push(href);-->
+<!--         }-->
+<!--         let uniArr = [...new Set(arr)];-->
+<!--         console.log(uniArr);-->
+<!--         for(let i = 0; i < arr.length; i++){-->
+<!--            console.log(uniArr[i]);-->
+<!--            unique_link = document.querySelector(`[href="${arr[i]}"]`);-->
+<!--            if(unique_link.text.trim() != 'Мой профиль'){-->
+<!--                console.log(unique_link);-->
+<!--&lt;!&ndash;                unique_link.parentElement.parentElement.remove();&ndash;&gt;-->
+<!--            }-->
+<!--         }-->
+<!--    });-->
+<!--</script>-->
+
+{% endblock script %}

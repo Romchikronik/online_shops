@@ -1,0 +1,14 @@
+{% load i18n %}
+{% if user.onlineshop %}
+<div class="overlay"></div>
+
+ <div class="delete-online_shop">
+        <form method="POST" action="{% url 'delete_onlineshop' request.user.onlineshop.pk  request.user.onlineshop.slug %}">
+            {% csrf_token %}
+            <p class="delete-online_shop__text">
+                {% trans 'Вы действитьно хотите удалить магазин' %} "{{ request.user.onlineshop.title }}" ?
+            </p>
+            <input type="submit" value="{% trans 'Да, удалить' %}" class="delete-online_shop__btn">
+        </form>
+ </div>
+{% endif %}

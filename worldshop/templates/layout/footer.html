@@ -1,0 +1,28 @@
+{% load i18n %}
+<footer class="footer">
+    <div class="container footer__container">
+        <h2 class="footer__title">{% trans 'Ваш бизнес начинается здесь!!!' %}</h2>
+        <p class="footer__subtitle">{% trans 'Связаться с нами' %}</p>
+        <ul class="footer-contacts">
+            <li class="footer-contacts__item">
+                <a href="tel:+998901111329" class="number">
+                    +998901111329
+                </a>
+            </li>
+            <li class="footer-contacts__item">
+                <a href="mailto:rkolesov465@gmail.com">rkolesov465@gmail.com</a>
+            </li>
+        </ul>
+        <ul class="footer-web">
+            <li><a class="footer-web__link" href=""><i class="fa-brands fa-telegram"></i></a></li>
+            <li><a class="footer-web__link" href=""><i class="fa-brands fa-facebook"></i></a></li>
+            <li><a class="footer-web__link" href=""><i class="fa-brands fa-instagram"></i></a></li>
+        </ul>
+    </div>
+</footer>
+
+<nav class="footer-nav">
+    <div class="container">
+        <p class="footer-nav__copy">2022 Dream Team. {% trans 'Все права защищены.' %}</p>
+    </div>
+</nav>

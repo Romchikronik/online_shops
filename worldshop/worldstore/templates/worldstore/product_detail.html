@@ -1,0 +1,270 @@
+{% extends 'index.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block style_anim %}
+<link rel="stylesheet" href="{% static 'worldstore/css/jquery.fancybox.min.css' %}">
+{% endblock style_anim %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'worldstore/css/shop_profile.min.css' %}">
+<link rel="stylesheet" href="{% static 'worldstore/css/product_detail.min.css' %}">
+{% endblock style %}
+
+
+{% block header %}
+{% endblock header %}
+
+{% block main %}
+
+<div class="container profile-nav">
+    <div class="profile-nav__social">
+        <a onclick="javascript:history.back(); return false;"
+           class="profile-nav__arrow-back"
+           style="cursor: pointer;">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+        <img src="{{ product.online_shop.get_image_url }}" alt="" class="profile-nav__img">
+        <p class="profile-nav__author">{{ product.online_shop.title }}</p>
+        <ul class="user-card-down__likes profile-nav__likes">
+            <li class="react__element" style="cursor: default;" data-id="" data-type="article" data-action="like"
+                title="Нравится">
+                <span class="count" data-count="like">{{ product.online_shop.votes.likes.count }}</span>
+                <i class="fa fa-solid fa-thumbs-up"></i>
+            </li>
+            <li class="react__element" style="cursor: default;" data-id="" data-type="article" data-action="dislike"
+                title="Не нравится">
+                <span class="count" data-count="dislike">{{ product.online_shop.votes.dislikes.count }}</span>
+                <i class="fa fa-solid fa-thumbs-up fa-rotate-180"></i>
+            </li>
+        </ul>
+        <div class="profile-nav__social-icons">
+            {% if product.online_shop.tg != None %}
+            <a href="{{ product.online_shop.tg }}"><i class="fa fa-brands fa-telegram"></i></a>
+            {% endif %}
+            {% if product.online_shop.insta != None %}
+            <a href="{{ product.online_shop.insta }}"><img src="{% static 'worldstore/images/instagram.png' %}" alt=""></a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="profile-nav__share-block">
+        {% if request.user.is_authenticated and user.onlineshop.slug == product.online_shop.slug and user.onlineshop.pk == product.online_shop.pk %}
+         <a class="header-top__improve" href="{% url 'update_product' product.online_shop.pk product.online_shop.slug product.slug %}">
+             <i class="fa-solid fa-pencil" style="color: #000;"></i>
+         </a>
+        {% else %}
+          <button
+              style="background: none; border: none;"
+              class="profile-nav__share product_share">
+              <i class="fa-solid fa-share-nodes"></i>
+          </button>
+<!--         <button style="background: none; border: none;"-->
+<!--                 class="profile-nav__share"-->
+<!--                 onClick='window.open("https://telegram.me/share/url?url=http://127.0.0.1:8000/product/{{ product.slug }}/","sharer","status=0,toolbar=0,width=650,height=500");'-->
+<!--                 title="Поделиться">-->
+<!--                <i class="fa-solid fa-share-nodes"></i>-->
+<!--         </button>-->
+<!--        <a href="" class="profile-nav__share"><i class="fa-solid fa-share-nodes"></i></a>-->
+<!--        <a class="profile-nav__favorite favorite-link" title="Избранное">-->
+<!--            <i class="fa-regular fa-bookmark"></i>--> <!-- в твком случае надо убрать отступ у share-->
+<!--        </a>-->
+        {% endif %}
+    </div>
+</div>
+<div class="container product_detail">
+    {% if product_images %}
+    <div class="slider">
+        <div class="inner">
+            {% for image in product_images %}
+            {% if forloop.first %}
+            <div class="inner__wrap slider__img active">
+                <a data-fancybox="slide" href="{{ image.get_image_url }}">
+                    <img src="{{ image.get_image_url }}" alt="">
+                </a>
+            </div>
+            {% else %}
+            <div class="inner__wrap slider__img">
+                <a data-fancybox="slide" href="{{ image.get_image_url }}">
+                    <img src="{{ image.get_image_url }}" alt="">
+                </a>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        {% if images_length != 1 %}
+        <div class="arrows">
+            <button class="left slider__btn"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="right slider__btn"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+        <ul class="indicators">
+            {% for image_idx in images_ids %}
+                {% if forloop.first %}
+                    <li class="active-li" data-slide="{{ image_idx }}"></li>
+                {% else %}
+                    <li data-slide="{{ image_idx }}"></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+    {% else %}
+    <img style="margin: auto auto;" src="https://wordassociations.net/image/200x/svg_to_png/Anonymous_aiga_information_.png" alt="">
+    {% endif %}
+    <div class="product_detail-content">
+        <div class="mobile-version-of-profile-nav">
+            <div class="profile-nav__share-block mobile-version__share-block">
+                <button
+                    style="background: none; border: none;"
+                    class="profile-nav__share product_share">
+                    <i class="fa-solid fa-share-nodes"></i>
+                </button>
+<!--                  <button style="background: none; border: none;"-->
+<!--                    class="profile-nav__share"-->
+<!--                    onClick='window.open("https://telegram.me/share/url?url=http://127.0.0.1:8000/product/{{ product.slug }}/","sharer","status=0,toolbar=0,width=650,height=500");'-->
+<!--                     title="Поделиться">-->
+<!--                    <i class="fa-solid fa-share-nodes"></i>-->
+<!--                  </button>-->
+<!--                <a class="profile-nav__favorite favorite-link" title="Избранное">-->
+<!--                    <i class="fa-regular fa-bookmark"></i>-->
+<!--                </a>-->
+            </div>
+            <button class="mobile-version__contact">{% trans 'Связаться' %}</button>
+        </div>
+        <h4 class="product_detail-content__title">{{ product.title }}</h4>
+        <p class="product_detail-content__subtitle">{% trans 'Цена' %}</p>
+        <p class="product_detail-content__price">{{ product.price }} {% trans 'сум' %}</p>
+        <p class="product_detail-content__subtitle">{% trans 'Описание' %}</p>
+        <p class="product_detail-content__text">
+            {{ product.desc }}
+        </p>
+        <p class="product_detail-content__subtitle">{% trans 'Доставка' %}</p>
+        <div class="product_detail-content__deliver">
+            <p>{{ product.deliver }} <span><i class="fa-solid fa-truck"></i></span></p>
+            <!--            <p>Яндекс доставка <span><i class="fa-solid fa-truck"></i></span></p>-->
+        </div>
+        <p class="product_detail-content__subtitle product_detail-content__contacts-subtitle">
+            {% trans 'Связаться с нами' %}
+        </p>
+        <div class="product_detail-content__btns">
+ <a          class="product_detail-content__contacts" href="tel:+{{ product.phone_number }}">+{{ product.phone_number }}</a>
+        {% if request.user.is_authenticated and user.onlineshop.slug == product.online_shop.slug and user.onlineshop.pk == product.online_shop.pk %}
+            <a href="" class="tabs-card__delete">{% trans 'Удалить' %}</a>
+        {% endif %}
+        </div>
+
+    </div>
+</div>
+<div class="container all-products">
+    {% if request.user.is_authenticated and user.onlineshop.slug == product.online_shop.slug and user.onlineshop.pk == product.online_shop.pk %}
+     <p class="all-products__title">{% trans 'Все ваши обьявления' %}</p>
+    {% else %}
+     <p class="all-products__title">{% trans 'Все обьявления продавца' %}</p>
+    {% endif %}
+    {% if products %}
+        {% include 'worldstore/components/_shop_first_pane.html' %}
+    {% else %}
+        <p>{% trans 'В этом магазине пока нет других товаров' %}</p>
+    {% endif %}
+</div>
+{% if request.user.is_authenticated and user.onlineshop.slug != product.online_shop.slug and user.onlineshop.pk != product.online_shop.pk %}
+<div class="container similar-shops">
+    <p class="all-products__title similar-shops__title">
+        {% trans 'Вас также могут заинтересовать:' %}
+    </p>
+    {% if similar_shops %}
+    <div class="row">        <!-- TODO Надо изменить только на похожие магазины  -->
+        {% for online_shop in similar_shops %}
+            {% if online_shop.product__count %}
+                {% include 'worldstore/components/_shop_card.html' %}
+            {% endif %}
+        {% endfor %}
+    </div>
+    {% else %}
+    <p style="font-size: 15px;">{% trans 'Пока нет рекамендованных магазинов' %}</p>
+    {% endif %}
+</div>
+{% endif %}
+
+
+{% endblock main %}
+
+
+{% block modal %}
+<div class="overlay"></div>
+
+ <div class="delete-product">
+        <form method="POST" action="{% url 'delete_product' product.online_shop.pk product.online_shop.slug product.slug %}">
+            {% csrf_token %}
+            <p class="delete-product__text">
+                {% trans 'Вы действитьно хотите удалить товар' %} "{{ product.title }}" ?
+            </p>
+            <input type="submit" value="{% trans 'Да, удалить' %}" class="delete-product__btn">
+        </form>
+ </div>
+
+<div class="mobile-contacts-modal">
+    <a class="product_detail-content__contacts mobile-contacts__contact" href="tel:{{ product.phone_number }}">
+        {{ product.phone_number }}
+    </a>
+    <div class="profile-nav__social-icons mobile-contacts__social">
+        {% if product.online_shop.tg != None %}
+        <a href="{{ product.online_shop.tg }}"><i class="fa fa-brands fa-telegram"></i></a>
+        {% endif %}
+        {% if product.online_shop.insta != None %}
+        <a href="{{ product.online_shop.insta }}"><img src="{% static 'worldstore/images/instagram.png' %}" alt=""></a>
+        {% endif %}
+    </div>
+</div>
+
+<div class="online_shop_share_block product_share_block">
+    <ul class="online_shop_share_block-list">
+        <li class="online_shop_share_block-list__item">
+            <button
+                    onClick='window.open("https://telegram.me/share/url?url=http://127.0.0.1:8000/product/{{ product.slug }}/","sharer","status=0,toolbar=0,width=650,height=500");'
+                    class="online_shop_share_block-list__btn"
+                    title="Поделиться в telegram">
+                    <i class="fa-brands fa-telegram"></i>
+            </button>
+        </li>
+        <li class="online_shop_share_block-list__item">
+            <button
+                    onClick='window.open("https://www.facebook.com/sharer.php?u=http://127.0.0.1:8000/product/{{ product.slug }}/","sharer","status=0,toolbar=0,width=650,height=500");'
+                    class="online_shop_share_block-list__btn"
+                    title="Поделиться в facebook">
+                    <i class="fa-brands fa-facebook"></i>
+            </button>
+        </li>
+        <!--        <li class="online_shop_share_block-list__item">-->
+        <!--            <button-->
+        <!--                    class="online_shop_share_block-list__btn"-->
+        <!--                    title="Поделиться в instagram">-->
+        <!--                <i class="fa-brands fa-instagram"></i>-->
+        <!--            </button>-->
+        <!--        </li>-->
+    </ul>
+</div>
+
+{% endblock modal %}
+
+
+{% block s_script %}
+<script src="{% static 'worldstore/js/jquery.fancybox.min.js' %}"></script>    <!-- Если что вставить в другой блок-->
+{% if product_images %}
+{% if images_length != 1 %}
+<script src="{% static 'worldstore/js/slider.js' %}"></script>
+{% endif %}
+{% endif %}
+<script>
+  desc = document.querySelector(".product_detail-content__text");
+  desc_text = desc.innerHTML.trim();
+  if (desc_text.length <= 288) {
+    $(".product_detail-content__text").css("overflow-y", "hidden");
+  } else {
+    $(".product_detail-content__text").css("overflow-y", "scroll");
+  }
+</script>
+{% endblock s_script %}

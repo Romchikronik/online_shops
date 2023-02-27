@@ -1,0 +1,27 @@
+{% if request.user.is_authenticated %}
+<li style="cursor: pointer;" class="react__element" data-id="{{ online_shop.pk }}" data-type="online_shop" data-action="like"
+    title="Нравится">
+    <span class="count" data-count="like">{{ online_shop.votes.likes.count }} </span>
+    <i class="fa fa-solid fa-thumbs-up"></i>
+</li>
+<li style="cursor: pointer;" class="react__element" data-id="{{ online_shop.pk }}" data-type="online_shop" data-action="dislike"
+    title="Не нравится">
+    <span class="count" data-count="dislike">{{ online_shop.votes.dislikes.count }}</span>
+    <i class="fa fa-solid fa-thumbs-up fa-rotate-180"></i>
+</li>
+{% else %}
+<li>
+<a style="color: gray;" href="{% url 'login_registration' %}" class="react__element"
+    title="Нравится">
+    <span class="count" data-count="like">{{ online_shop.votes.likes.count }} </span>
+    <i class="fa fa-solid fa-thumbs-up"></i>
+</a>
+</li>
+<li>
+<a style="color: gray;" href="{% url 'login_registration' %}" class="react__element"
+    title="Не нравится">
+    <span class="count" data-count="dislike">{{ online_shop.votes.dislikes.count }}</span>
+    <i class="fa fa-solid fa-thumbs-up fa-rotate-180"></i>
+</a>
+</li>
+{% endif %}

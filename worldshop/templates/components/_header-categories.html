@@ -1,0 +1,18 @@
+{% load i18n %}
+{% load worldstore_tags %}
+{% get_categories as categories %}
+<div class="container">
+    <div class="header-categories">
+        <h3 class="header-categories__title">{% trans 'Категории' %}</h3>
+        <div class="header-categories__block">
+            {% for category in categories %}
+            <a class="header-categories__links" href="{{ category.get_absolute_url }}">
+                <img class="header-categories__img" src="{{ category.get_image_url }}" alt="">
+                <div class="header-categories__text">
+                    <p class="header-categories__subtext">{{ category.title }}</p>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>

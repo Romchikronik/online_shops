@@ -1,0 +1,158 @@
+{% load worldstore_tags %}
+{% load i18n %}
+{% get_categories as categories %}
+
+<header class="header header-categoty_detail">
+    <div class="container">
+        <h2 class="header__title">
+            {% for category in categories %}
+                {% if cat_slug == category.slug %}
+                    {{ category.title }}
+                {% endif %}
+            {% endfor %}
+        </h2>
+        {% for category in categories %}
+        {% if cat_slug == category.slug %}
+        {% if 'search-select=products' in request.get_full_path or 'search_by_products' in request.get_full_path %}
+        <div id="filter_by_categories" >
+            <form method="get" action="{% url 'search_by_products_of_category' category.slug %}"
+                  class="header-search" autocomplete="on" id="filter_by_categories_form">
+                <div class="header-search__relative">
+                    <input
+                            value=""
+                            name="p"
+                            id="search__field"
+                            class="header-search__field"
+                            type="search"
+                            placeholder="{% trans 'Что вы ищите?' %}"
+                            oninput="if(this.value) {document.querySelector('.search-icon').style.display = 'block'
+                                             document.querySelector('.search-filter').style.display = 'none'}
+                                             else{document.querySelector('.search-icon').style.display = 'none'
+                                             document.querySelector('.search-filter').style.display = 'block'}">
+                    <button type="submit" class="header-search__btn search-icon"><i class="fa fa-solid fa-magnifying-glass" aria-hidden="true"></i></button>
+                    <button type="button" class="header-search__btn search-filter search_btn">
+                        <i class="fa-solid fa-arrow-up-wide-short"></i>
+                    </button>
+                </div>
+            </form>
+
+            <details id="details-id" class="header-filter">
+                <summary class="header-filter__summary">{% trans "По товарам" %}</summary>
+
+                <a class="header-filter__link" id="details-link-id"
+                   href="{% url 'online_shop_by_category' category.slug %}?search-select=online_shops">
+                    {% trans "По магазинам" %}
+                </a>
+
+            </details>
+
+        </div>
+        {% else %}
+        <div id="filter_by_categories" >
+            <form method="get" action="{% url 'search_by_online_shops' category.slug %}"
+                  class="header-search" autocomplete="on" id="filter_by_categories_form">
+                <div class="header-search__relative">
+                    <input
+                            value=""
+                            id="search__field"
+                            name="q"
+                            class="header-search__field"
+                            type="search"
+                            placeholder="{% trans 'Что вы ищите?' %}"
+                            oninput="if(this.value) {document.querySelector('.search-icon2').style.display = 'block'
+                  document.querySelector('.search-filter2').style.display = 'none'}
+                  else{document.querySelector('.search-icon2').style.display = 'none'
+                  document.querySelector('.search-filter2').style.display = 'block'}">
+                    <button type="submit" class="header-search__btn search-icon2">
+                        <i class="fa fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                    </button>
+                    <button type="button" class="header-search__btn search-filter2 search_btn">
+                        <i class="fa-solid fa-arrow-up-wide-short"></i>
+                    </button>
+                </div>
+            </form>
+
+            <details id="details-id" class="header-filter">
+                <summary class="header-filter__summary">{% trans "По магазинам" %}</summary>
+
+                <a class="header-filter__link" id="details-link-id"
+                   href="{% url 'online_shop_by_category' category.slug %}?search-select=products">
+                    {% trans "По товарам" %}
+                </a>
+
+            </details>
+        </div>
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+        <div class="header-filter" id="header-filter">
+            <div class="filter-wrap">
+                <p class="header-filter__title" style="text-align: left">{% trans 'Рубрика' %}</p>
+                <div class="header-dropdown header-filter__dropdown">
+                    <button class="header-dropdown__toggle header-filter__toggle dropdown-categories" type="button">
+                        {% for category in categories %}
+                        {% if cat_slug == category.slug %}
+                        {{ category.title }}
+                        {% endif %}
+                        {% endfor %}
+                        <i class="fa fa-solid fa-caret-down"></i>
+                    </button>
+                    <ul class="header-dropdown__menu header-filter__menu dropdown-categories__menu"
+                        aria-labelledby="dropdownWatchType">
+                        {% for category in categories %}
+                        {% if cat_slug == category.slug %}
+                        <li style="padding-left: 0; padding-right: 0;">
+                            <a class="header-dropdown__item">{{ category.title }}</a>
+                        </li>
+                        {% else %}
+                        <li style="padding-left: 0; padding-right: 0;">
+                            {% if 'search-select=products' in request.get_full_path %}
+                                <a class="header-dropdown__item" href="{{ category.get_absolute_url }}?search-select=products">{{ category.title }}</a>
+                            {% else %}
+                                <a class="header-dropdown__item" href="{{ category.get_absolute_url }}">{{ category.title }}</a>
+                            {% endif %}
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="header__line"></div>
+    </div>
+</header>
+
+<!--<div class="container">-->
+<!--    <div class="form-group">-->
+<!--        <div class="card">-->
+<!--            {% if 'search-select=products' in request.get_full_path %}-->
+<!--                <form method="get">-->
+<!--                    <p>{{ productFilter.form.online_shop__region }}</p>-->
+<!--                    От:-->
+<!--                     <p>{{ productFilter.form.price__gte }}</p>-->
+
+<!--                    До:-->
+<!--                     <p>{{ productFilter.form.price__lte }}</p>-->
+
+
+<!--                    <select name="search-select">-->
+<!--                        <option name="online_shops" value="online_shops">По магазинам</option>-->
+<!--                        <option name="products" selected value="products">По товарам</option>-->
+<!--                    </select>-->
+<!--                  <button class="btn" style="z-index: 200; color: black;" type="submit">Применить</button>-->
+<!--                </form>-->
+<!--            {% else %}-->
+<!--                  <form method="get">-->
+<!--                    <p>{{ onlineShopsFilter.form.region }}</p>-->
+<!--                    <br>-->
+<!--                    Поиск по-->
+<!--                    <select name="search-select" id="">-->
+<!--                        <option name="online_shops" selected value="online_shops">По магазинам</option>-->
+<!--                        <option name="products" value="products">По товарам</option>-->
+<!--                    </select>-->
+<!--                    <button class="btn" style="z-index: 200; color: black;" type="submit">Применить</button>-->
+<!--                </form>-->
+<!--            {% endif %}-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->

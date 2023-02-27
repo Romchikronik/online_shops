@@ -1,0 +1,26 @@
+{% load i18n %}
+<div class="row">
+    {% if request.user.is_authenticated and user.onlineshop.slug == online_shop.slug and user.onlineshop.pk == online_shop.pk %}
+    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6">
+        <a href="{% url 'create_product' online_shop.pk online_shop.slug %}" class="tabs-card">
+            <div class="tabs-card__bg">
+                <div class="tabs-card__circle">
+                    <p class="tabs-card__plus">+</p>
+                </div>
+            </div>
+            <div class="tabs-card__text">
+                {% trans 'Добавте обьявления' %}
+            </div>
+        </a>
+    </div>
+    {% endif %}
+    {% if page_obj %}
+    {% for product in page_obj %}
+    {% include 'worldstore/components/_product-card.html' %}
+    {% endfor %}
+    {% else %}
+    {% for product in products %}
+    {% include 'worldstore/components/_product-card.html' %}
+    {% endfor %}
+    {% endif %}
+</div>

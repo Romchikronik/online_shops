@@ -1,0 +1,87 @@
+{% extends 'index.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'worldstore/css/category_detail.min.css' %}">
+<link rel="stylesheet" href="{% static 'worldstore/css/shop_profile.min.css' %}">
+{% endblock style %}
+
+{% block header %}
+{% include 'worldstore/components/_category_header.html' %}
+{% endblock header %}
+
+{% block main %}
+
+<section class="list-cards list-cards_categories">
+    <div class="list-cards-wrap">
+        <h2 class="title">{% trans 'По вашему запросу найдено:' %}</h2>
+        <div class="container">
+            <div class="row">
+                {% if object_list %}
+                    {% if 'sort' in request.get_full_path %}
+                        {% for product in products %}
+                            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6">
+                            <a href="{{ object.get_absolute_url }}" class="tabs-card">
+                            <div class="tabs-card__image">
+                                {% if product.productimages_set.all %}
+                                    {% for product_image in product.productimages_set.all %}
+                                        {% if forloop.first %}
+                                            <img src="{{ product_image.get_image_url }}" alt="">
+                                        {% endif %}
+                                    {% endfor %}
+                                {% else %}
+                                <img src="https://wordassociations.net/image/200x/svg_to_png/Anonymous_aiga_information_.png"
+                                 alt="">
+                                {% endif %}
+                            </div>
+                            <div class="tabs-card__title">
+                                {{ product.title }}
+                            </div>
+                            <div class="tabs-card__sum">
+                                {{ product.price }} {% trans 'сум' %}
+                            </div>
+                            </a>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                    {% for object in object_list %}
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6">
+                            <a href="{{ object.get_absolute_url }}" class="tabs-card">
+                            <div class="tabs-card__image">
+                                {% if object.productimages_set.all %}
+                                    {% for product_image in object.productimages_set.all %}
+                                        {% if forloop.first %}
+                                            <img src="{{ product_image.get_image_url }}" alt="">
+                                        {% endif %}
+                                    {% endfor %}
+                                {% else %}
+                                <img src="https://wordassociations.net/image/200x/svg_to_png/Anonymous_aiga_information_.png"
+                                 alt="">
+                                {% endif %}
+                            </div>
+                            <div class="tabs-card__title">
+                                {{ object.title }}
+                            </div>
+                            <div class="tabs-card__sum">
+                                {{ object.price }} {% trans 'сум' %}
+                            </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                    {% endif %}
+                {% else %}
+                    <p>{% trans 'Не найдено публикаций по вашему запросу' %}<br>{% trans 'Попробуйте повторить запрос с другой формулировкой' %}</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include 'worldstore/components/_pagination.html' %}
+
+{% endblock main %}

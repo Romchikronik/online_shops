@@ -1,0 +1,7 @@
+{% load i18n %}
+<h3 class="about__title">{% trans 'Адрес' %}</h3>
+<form action="{% url 'save_geo' online_shop.pk online_shop.slug %}" class="geo__form" method="post">
+    {% csrf_token %}
+    {{ geo_form.geo }}
+    <button class="geo__btn">{% trans 'Сохранить' %}</button>
+</form>

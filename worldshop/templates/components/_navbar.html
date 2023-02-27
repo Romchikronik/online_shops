@@ -1,0 +1,168 @@
+{% load i18n %}
+{% load worldstore_tags %}
+{% get_categories as categories %}
+
+<div class="mobile-top-navbar">
+    <div class="logo_lang">
+        <div class="container">
+            <div class="logo">
+                <a href="{% url 'index' %}"><strong>Shops</strong> <span>4</span> <strong>you</strong></a>
+            </div>
+            {% get_current_language as LANGUAGE_CODE %}
+            {% get_available_languages as LANGUAGES %}
+            {% get_language_info_list for LANGUAGES as languages %}
+            <ul class="nav-block__lang">
+                {% for language in languages %}
+                    <li class="nav-block__item">
+                        <a href="{% translate_url language.code %}" class="nav-block__link">
+                            <!--{% if language.code == LANGUAGE_CODE %} class="selected" {% endif %}-->
+                            {{ language.code }}    <!-- language.name_local -->
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="container">
+        <div class="menu-links">
+            {% if '/category/' in request.get_full_path %}
+            {% if 'search-select=products' in request.get_full_path or 'search_by_products' in request.get_full_path %}
+                <details class="header-filter__detail">
+                    <summary class="header-filter__summary">{% trans "По товарам" %}</summary>
+                    <a class="header-filter__link" href="{% url 'online_shop_by_category' cat_slug %}?search-select=online_shops">{% trans "По магазинам" %}</a>
+                </details>
+            {% else %}
+                <details class="header-filter__detail">
+                    <summary class="header-filter__summary">{% trans "По магазинам" %}</summary>
+                    <a class="header-filter__link" href="{% url 'online_shop_by_category' cat_slug %}?search-select=products">{% trans "По товарам" %}</a>
+                </details>
+            {% endif %}
+            <div class="menu-links-categories">
+                <button class="menu-links-categories__toggle" type="button">
+                    {% if not cat_slug %}
+                    {% trans 'Категории' %}
+                    {% endif %}
+                    {% for category in categories %}
+                    {% if cat_slug == category.slug %}
+                    {{ category.title }}
+                    {% endif %}
+                    {% endfor %}
+                    <i class="fa fa-solid fa-caret-down"></i>
+                </button>
+                <ul class="menu-links-categories__menu" aria-labelledby="dropdownWatchType">
+                    {% for category in categories %}
+                    {% if cat_slug == category.slug %}
+                    <li><a class="menu-links-categories__item">{{ category.title }}</a></li>
+                    {% else %}
+                    <li><a class="menu-links-categories__item"
+                           href="{{ category.get_absolute_url }}">{{ category.title }}</a></li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+            {% else %}
+            {% if 'search-select=products' in request.get_full_path or 'search_by_products' in request.get_full_path %}
+                <details class="header-filter__detail">
+                    <summary class="header-filter__summary">{% trans "По товарам" %}</summary>
+                    <a class="header-filter__link" href="/?search-select=online_shops">{% trans "По магазинам" %}</a>
+                </details>
+            {% else %}
+                <details class="header-filter__detail">
+                    <summary class="header-filter__summary">{% trans "По магазинам" %}</summary>
+                    <a class="header-filter__link" href="/?search-select=products">{% trans "По товарам" %}</a>
+                </details>
+            {% endif %}
+            {% endif %}
+
+
+            {% if request.user.is_authenticated %}
+            <a href="{% url 'logout' %}" class="exit">{% trans 'Выйти' %}</a>
+            {% if user.onlineshop %}
+            <a href="#" class="del-shop">{% trans 'Удалить магазин' %}</a>
+            {% endif %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<nav class="mobile-top-nav">
+    <div class="container">
+        <div class="logo">
+            <a href="{% url 'index' %}"><strong>Shops</strong> <span>4</span> <strong>you</strong></a>
+        </div>
+        <button class="nav-block__burger mobile-top-nav__burger">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+</nav>
+
+<nav class="nav" id="navbar">
+    <div class="container">
+        <div class="nav-block">
+            <div class="logo">
+                <a href="{% url 'index' %}"><strong>Shops</strong> <span>4</span> <strong>you</strong></a>
+            </div>
+            <ul class="nav-block__menu">
+                {% get_current_language as LANGUAGE_CODE %}
+                {% get_available_languages as LANGUAGES %}
+                {% get_language_info_list for LANGUAGES as languages %}
+                <li class="languages">
+                    <ul class="languages nav-block__lang">
+                        {% for language in languages %}
+                        <li class="nav-block__item">
+                            <a href="{% translate_url language.code %}" class="nav-block__link">
+                                <!--{% if language.code == LANGUAGE_CODE %} class="selected" {% endif %}-->
+                                {{ language.code }}    <!-- language.name_local -->
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                <!--                <ul class="nav-block__lang">-->
+
+                <!--                    <li class="nav-block__item"><a class="nav-block__link" href="">О'z</a></li>-->
+                <!--                    <li class="nav-block__item"><a class="nav-block__link" href="">Ру</a></li>-->
+                <!--                </ul>-->
+
+                <li class="nav-block__item">
+                    <a href="{% url 'bookmarks' %}" class="nav-block__link">
+                        {% trans 'Избранное' %}
+                    </a>
+                </li>
+
+                <li class="nav-block__item">
+                    {% if request.user.is_authenticated %}
+                    {% if user.onlineshop %}
+                    <a href="{% url 'online_shop_detail' user.onlineshop.pk user.onlineshop.slug %}" class="nav-block__link">
+                        {% trans 'Мой профиль' %}
+                    </a>
+                    {% else %}
+                    <a href="{% url 'create_profile' %}" class="nav-block__link">
+                        {% trans 'Создать магазин' %}
+                    </a>
+                    {% endif %}
+                    <a href="{% url 'logout' %}" class="nav-block__link">
+                        {% trans 'Выйти' %}
+                    </a>
+                    {% endif %}
+                </li>
+                {% if not request.user.is_authenticated %}
+                <li class="nav-block__item">
+                    <a href="{% url 'login_registration' %}" class="nav-block__link nav-block__link_last">
+                        {% trans 'Регистрация | Войти' %}
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+            <button class="nav-block__burger navbar_burger">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,37 @@
+{% load i18n %}
+<div class="col-xl-3 col-lg-4 col-md-5 col-sm-6 col-6">
+    <div class="user-card">
+        <a href="{{ online_shop.get_absolute_url }}" class="user-card-top">
+            <div class="user-card-top__background">
+                <img class="user-card-top__bgImg" src="{{ online_shop.get_bg_url }}" alt="">
+                <div class="user-card-top__image-wrap">
+                    <img class="user-card-top__image" src="{{ online_shop.get_image_url }}" alt="">
+                </div>
+            </div>
+        </a>
+        <div class="user-card-down">
+            <div class="user-card-down__text">
+                <a href="{{ online_shop.get_absolute_url }}" class="user-card-down__title">{{ online_shop.title }}</a>
+                <p class="user-card-down__subtitle">
+                    {% if online_shop.content.content %}
+                        {{ online_shop.content.content|truncatewords:8 }}
+                    {% else %}
+                        {% trans 'Владелец пока не добавил' %}
+                         <br>
+                        {% trans 'описание' %}
+                    {% endif %}
+                </p>
+            </div>
+            <div class="user-card-down__evaluation">
+                <ul class="user-card-down__likes">
+                  {% include 'worldstore/components/_shop_likes.html' %}
+                </ul>
+                <div class="user-card-down__favorite">
+                      <div class="add_to_favorites favorite-link" data-type="online_shop" data-id="{{ online_shop.pk }}" title="Избранное">
+                            <i class="fa-regular fa-bookmark"></i>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

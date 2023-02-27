@@ -1,0 +1,30 @@
+<!--<p class="header-info__title">-->
+<!--    {{ online_shop.title }}-->
+<!--</p>-->
+<!--<nav class="menu animate__animated wow animate__pulse" data-wow-duration="2s"-->
+<!--     data-wow-iteration="infinite">-->
+<!--    <input type="checkbox" href="#" class="menu-open" name="menu-open" id="menu-open"/>-->
+<!--    <label class="menu-open-button" for="menu-open">-->
+<!--        <img class="profile_img" src="{{ online_shop.get_image_url }}" alt="">-->
+<!--    </label>-->
+
+<!--    <a href="tel:{{ online_shop.phone_number }}" class="menu-item blue"><i class="fa fa-solid fa-phone"></i></a>-->
+<!--    {% if online_shop.tg != None %}-->
+<!--    <a href="{{ online_shop.tg }}" class="menu-item green"><i class="fa fa-brands fa-telegram"></i></a>-->
+<!--    {% endif %}-->
+<!--    {% if online_shop.insta != None %}-->
+<!--    <a href="{{ online_shop.insta }}" class="menu-item lightblue"><i class="fa fa-brands fa-instagram"></i></a>-->
+<!--    {% endif %}-->
+<!--</nav>-->
+{% load i18n %}
+<div class="header-info__left-block">
+    <img class="profile_img" src="{{ online_shop.get_image_url }}" alt="">
+    <div class="header-info__context">
+        <h3 class="header-info__name">{{ online_shop.title }}</h3>
+        <time id="time" class="header-info__time" title="Последняя дата обновления магазина">{{ online_shop.time_update }}</time>
+    </div>
+</div>
+<div class="header-info__right-block">
+    <p class="header-info__count"><span>{{ online_shop.product_set.count }}</span> {% trans 'обьявлениий' %}</p>
+    <button class="header-info__contact_us">{% trans 'Cвязаться' %}</button>
+</div>

@@ -1,0 +1,82 @@
+<header class="header">
+     <div class="header-mobile-menu-line">
+            <div class="container">
+                <div class="header-top header-mobile-menu-line">
+                    <div class="header-top__back">
+                         <a onclick="javascript:history.back(); return false;" class="header-top__link">
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </a>
+                    </div>
+                    {% if request.user.is_authenticated and user.onlineshop.slug == online_shop.slug and user.onlineshop.pk == online_shop.pk %}
+                    <a class="header-top__improve" href="{% url 'update_profile' online_shop.pk online_shop.slug %}">
+                        <i class="fa-solid fa-pencil" style="color: #000;"></i>
+                    </a>
+                    {% else %}
+                    <ul class="header-top__links">
+                        <li class="header-top__item">
+                            <button
+                            style="background: none; border: none;"
+                            class="header-top__link online_shop_share">
+                                <i class="fa-solid fa-share-nodes"></i>
+                            </button>
+                        </li>
+                        <li class="header-top__item">
+<!--                            <div data-id="{{ online_shop.pk }}" data-type="online_shop"-->
+<!--                                 data-action="bookmark" title="Избранное" class="favorite-link header-top__link">-->
+<!--                                <i class="{% if online_shop.bookmarkonlineshop.obj %}fa-solid{% else %}fa-regular{% endif %} fa-bookmark"></i>-->
+<!--                            </div>-->
+                            <div class="add_to_favorites favorite-link header-top__link" data-type="online_shop" data-id="{{ online_shop.pk }}" title="Избранное">
+                                <i class="fa-regular fa-bookmark"></i>
+                            </div>
+                        </li>
+                    </ul>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+        <div class="container">
+            <div class="header-wrap header-profilewrap" style="border-radius: 20px; overflow: hidden;">
+                <div class="header-wrap__img" style="background-image: url('{{ online_shop.get_bg_url }}'); background-repeat: no-repeat;
+                     background-size: cover; background-position: center center; border-radius: 20px;" >
+                </div>
+<!--                <img class="header-wrap__img" src="{{ online_shop.get_bg_url }}" alt="">-->
+                <div class="header-top">
+                    <div class="header-top__back">
+                        <a onclick="javascript:history.back(); return false;" class="header-top__link">
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </a>
+                    </div>
+                    {% if request.user.is_authenticated and user.onlineshop.slug == online_shop.slug and user.onlineshop.pk == online_shop.pk %}
+                    <a class="header-top__improve" href="{% url 'update_profile' online_shop.pk online_shop.slug %}">
+                        <i class="fa-solid fa-pencil" style="color: #000;"></i>
+                    </a>
+                    {% else %}
+                    <ul class="header-top__links">
+                        <li class="header-top__item">
+                            <button
+                                style="background: none; border: none;"
+                                class="header-top__link online_shop_share">
+                                <i class="fa-solid fa-share-nodes"></i>
+                            </button>
+
+<!--                            <a href="" class="header-top__link"><i class="fa-solid fa-share-nodes"></i></a>-->
+                        </li>
+                        <li class="header-top__item">
+                             <div class="user-card-down__favorite">
+                              <div class="add_to_favorites favorite-link header-top__link" data-type="online_shop" data-id="{{ online_shop.pk }}" title="Избранное">
+                                 <i class="fa-regular fa-bookmark"></i>
+                              </div>
+                            </div>
+                        </li>
+                    </ul>
+                    {% endif %}
+                </div>
+
+            </div>
+            <div class="header-info">
+                    {% include 'worldstore/components/_header-info.html' %}
+            </div>
+        </div>
+
+</header>

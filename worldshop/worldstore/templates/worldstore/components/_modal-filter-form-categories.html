@@ -1,0 +1,50 @@
+{% load i18n %}
+<div class="overlay"></div>
+<div class="filter-window">
+    <h2 class="filter-window__title">Фильтры</h2>
+    {% if 'search-select=products' in request.get_full_path or 'search_by_products' in request.get_full_path %}
+    <form class="filter-window__form" method="get">
+        <div class="filter-window__wrapper">
+            <div class="filter-window__col">
+                <p class="filter-window__text">{% trans "Регион:" %}</p>
+                {{ productFilter.form.online_shop__region }}
+            </div>
+<!--            <div class="filter-window__col">-->
+<!--                <p class="filter-window__text">{% trans "Поиск по:" %}</p>-->
+                <select name="search-select" hidden>
+                    <option name="online_shops" value="online_shops">{% trans "По магазинам" %}</option>
+                    <option name="products" selected value="products">{% trans "По товарам" %}</option>
+                </select>
+<!--            </div>-->
+            <div class="filter-window__prices">
+                <div class="filter-window__col">
+                    <p class="filter-window__text"><label for="price_from">{% trans "От:" %}</label></p>
+                    {{ productFilter.form.price__gte }}
+                </div>
+                <div class="filter-window__col last_col">
+                    <p class="filter-window__text"><label for="price_to">{% trans "До:" %}</label></p>
+                    {{ productFilter.form.price__lte }}
+                </div>
+            </div>
+            <button class="filter-window__btn" type="submit">{% trans "Применить" %}</button>
+        </div>
+    </form>
+    {% else %}
+    <form class="filter-window__form" method="get">
+        <div class="filter-window__wrapper">
+            <div class="filter-window__col">
+                <p class="filter-window__text">{% trans "Регион:" %}</p>
+                {{ onlineShopsFilter.form.region }}
+            </div>
+<!--            <div class="filter-window__col">-->
+<!--                <p class="filter-window__text">{% trans "Поиск по:" %}</p>-->
+                <select name="search-select" id="" hidden>
+                    <option name="online_shops" selected value="online_shops">{% trans "По магазинам" %}</option>
+                    <option name="products" value="products">{% trans "По товарам" %}</option>
+                </select>
+<!--            </div>-->
+            <button class="filter-window__btn" type="submit">{% trans "Применить" %}</button>
+        </div>
+    </form>
+    {% endif %}
+</div>

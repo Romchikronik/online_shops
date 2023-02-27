@@ -1,0 +1,550 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-12-27 15:59+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+#: .\templates\components\_form_errors.html:7
+#: .\templates\components\_form_errors.html:14
+msgid "Произошла ошибка:"
+msgstr "Xato ro’y berdi:"
+
+#: .\templates\components\_header-categories.html:6
+#: .\templates\components\_navbar.html:31
+msgid "Категории"
+msgstr "Kategoriya"
+
+#: .\templates\components\_header.html:8
+msgid "Скорей открой свой магазин"
+msgstr "Tezroq o’z do’koningni och"
+
+#: .\templates\components\_header.html:9
+msgid "площадка для продажи"
+msgstr "sotish uchun platforma"
+
+#: .\templates\components\_header.html:21
+#: .\templates\components\_header.html:34
+#: .\worldstore\templates\worldstore\components\_category_header.html:103
+#: .\worldstore\templates\worldstore\components\_category_header.html:118
+msgid "Весь Узбекистан"
+msgstr "Butun O’zbekiston"
+
+#: .\templates\components\_mobile_navbar.html:10
+#: .\worldstore\templates\worldstore\bookmarks.html:57
+#: .\worldstore\templates\worldstore\login_registration.html:116
+#: .\worldstore\templates\worldstore\new_profile.html:30
+#: .\worldstore\templates\worldstore\online_shop_detail.html:109
+msgid "Главная"
+msgstr "Bosh sahifa"
+
+#: .\templates\components\_mobile_navbar.html:27
+#: .\worldstore\templates\worldstore\bookmarks.html:74
+#: .\worldstore\templates\worldstore\login_registration.html:133
+#: .\worldstore\templates\worldstore\new_profile.html:47
+#: .\worldstore\templates\worldstore\online_shop_detail.html:126
+msgid "Профиль"
+msgstr "Profilim"
+
+#: .\templates\components\_mobile_navbar.html:36
+#: .\templates\components\_navbar.html:105
+#: .\worldstore\templates\worldstore\bookmarks.html:93
+#: .\worldstore\templates\worldstore\login_registration.html:143
+#: .\worldstore\templates\worldstore\new_profile.html:66
+#: .\worldstore\templates\worldstore\online_shop_detail.html:145
+msgid "Избранное"
+msgstr "Sevimlilar"
+
+#: .\templates\components\_navbar.html:52
+#: .\templates\components\_navbar.html:121
+msgid "Выйти"
+msgstr "Chiqish"
+
+#: .\templates\components\_navbar.html:54
+msgid "Удалить магазин"
+msgstr "Do’konni o’chirish"
+
+#: .\templates\components\_navbar.html:113
+msgid "Мой профиль"
+msgstr "Profilim"
+
+#: .\templates\components\_navbar.html:117
+#: .\worldstore\templates\worldstore\components\_profile_create.html:63
+msgid "Создать магазин"
+msgstr "Do’kon yaratish"
+
+#: .\templates\components\_navbar.html:128
+msgid "Регистрация | Войти"
+msgstr "Ro’yhatga olish | Kirish"
+
+#: .\templates\layout\footer.html:4
+msgid "Ваш бизнес начинается здесь!!!"
+msgstr "Sizning biznesingiz su yerda boshlanadi!!!"
+
+#: .\templates\layout\footer.html:5
+#: .\worldstore\templates\worldstore\product_detail.html:150
+msgid "Связаться с нами"
+msgstr "Biz bilan bog’lanish"
+
+#: .\templates\layout\footer.html:26
+msgid "Все права защищены."
+msgstr "Barcha huquqlar himoyalangan"
+
+#: .\worldshop\settings.py:131
+msgid "Russian"
+msgstr ""
+
+#: .\worldshop\settings.py:132
+msgid "Uzbek"
+msgstr ""
+
+#: .\worldstore\forms.py:24
+msgid "Название магазина"
+msgstr "Do’kon nomi"
+
+#: .\worldstore\forms.py:32 .\worldstore\forms.py:124
+msgid "Номер телефона"
+msgstr "Telefon raqami"
+
+#: .\worldstore\forms.py:36
+msgid "Ссылка на аккаунт telegram"
+msgstr "Telegram akkaunt havolasi"
+
+#: .\worldstore\forms.py:40
+msgid "Ссылка на аккаунт instagram"
+msgstr "Instagram akkaunt havolasi"
+
+#: .\worldstore\forms.py:52
+msgid "Категория не выбрана"
+msgstr "Kategoriya tanlanmagan"
+
+#: .\worldstore\forms.py:53
+msgid "Регион не выбран"
+msgstr "Tuman tanlanmagan"
+
+#: .\worldstore\forms.py:65 .\worldstore\forms.py:137
+msgid "Длина телефона превышает 12 символов"
+msgstr "Telefonning raqami 12 belgidan oshdi"
+
+#: .\worldstore\forms.py:74
+msgid "Введите корректную ссылку на telegram профиль"
+msgstr "Yaroqli telegram profil havolasini kiriting"
+
+#: .\worldstore\forms.py:83
+msgid "Введите корректную ссылку на instagram профиль"
+msgstr "Yaroqli instagram profil havolasini kiriting"
+
+#: .\worldstore\forms.py:106
+#: .\worldstore\templates\worldstore\new_product.html:93
+msgid "Название"
+msgstr "Nom"
+
+#: .\worldstore\forms.py:115
+#: .\worldstore\templates\worldstore\new_product.html:97
+msgid "Цена (сум)"
+msgstr "Narx (so’m)"
+
+#: .\worldstore\forms.py:119
+#: .\worldstore\templates\worldstore\new_product.html:112
+#: .\worldstore\templates\worldstore\online_shop_detail.html:176
+#: .\worldstore\templates\worldstore\product_detail.html:140
+msgid "Описание"
+msgstr "Tavsif"
+
+#: .\worldstore\forms.py:128
+msgid "пример: Яндекс доставка"
+msgstr "Misol: Yandex yetkazib berish"
+
+#: .\worldstore\forms.py:169
+msgid "Введите информацию о своем магазине"
+msgstr "Do’koningiz haqida ma’lumot kiriting"
+
+#: .\worldstore\forms.py:187
+msgid "Вставьте ссылку геолокации"
+msgstr "Geolokatsiya havolasini joylashtiring"
+
+#: .\worldstore\forms.py:228
+msgid "Введите текст"
+msgstr "Matn kiriting"
+
+#: .\worldstore\forms.py:294 .\worldstore\forms.py:324
+#: .\worldstore\templates\worldstore\login_registration.html:75
+msgid "Ваше имя"
+msgstr "Ismingiz"
+
+#: .\worldstore\forms.py:299 .\worldstore\forms.py:307
+msgid "Пароль"
+msgstr "Parol"
+
+#: .\worldstore\forms.py:314
+msgid "Подтвердите пароль"
+msgstr "Parolni tasdiqlang"
+
+#: .\worldstore\templates\worldstore\bookmarks.html:36
+msgid "У вас пока нет сохраненных объявлений"
+msgstr "Sizda hali saqlangan e’lonlar yo’q"
+
+#: .\worldstore\templates\worldstore\components\_category_header.html:8
+msgid "Фильтры"
+msgstr "Filtrlar"
+
+#: .\worldstore\templates\worldstore\components\_category_header.html:14
+#: .\worldstore\templates\worldstore\components\_category_header.html:23
+msgid "Что вы ищите?"
+msgstr "Nima qidiryapsiz?"
+
+#: .\worldstore\templates\worldstore\components\_category_header.html:33
+msgid "Рубрика"
+msgstr "Sarlavhalar"
+
+#: .\worldstore\templates\worldstore\components\_category_header.html:73
+msgid "По убыванию"
+msgstr "Tushishi bo’yicha"
+
+#: .\worldstore\templates\worldstore\components\_category_header.html:75
+msgid "По возрастанию"
+msgstr "O’sishi bo’yicha"
+
+#: .\worldstore\templates\worldstore\components\_category_header.html:77
+#: .\worldstore\templates\worldstore\components\_category_header.html:86
+msgid "По умолчанию"
+msgstr "Standart bo’yicha"
+
+#: .\worldstore\templates\worldstore\components\_category_header.html:98
+msgid "Регион"
+msgstr "Tuman"
+
+#: .\worldstore\templates\worldstore\components\_content-form.html:2
+#: .\worldstore\templates\worldstore\components\_tabs-pills.html:9
+#: .\worldstore\templates\worldstore\online_shop_detail.html:42
+#: .\worldstore\templates\worldstore\online_shop_detail.html:62
+msgid "О нас"
+msgstr "Biz haqimizda"
+
+#: .\worldstore\templates\worldstore\components\_content-form.html:11
+#: .\worldstore\templates\worldstore\components\_geo-form.html:6
+msgid "Сохранить"
+msgstr "Saqlab olish"
+
+#: .\worldstore\templates\worldstore\components\_geo-form.html:2
+#: .\worldstore\templates\worldstore\online_shop_detail.html:51
+#: .\worldstore\templates\worldstore\online_shop_detail.html:72
+msgid "Адрес"
+msgstr "Adres"
+
+#: .\worldstore\templates\worldstore\components\_header-info.html:28
+msgid "обьявлениий"
+msgstr "e’lonlar"
+
+#: .\worldstore\templates\worldstore\components\_header-info.html:29
+msgid "Cвязаться"
+msgstr "Bog’lanish"
+
+#: .\worldstore\templates\worldstore\components\_product-card.html:19
+#: .\worldstore\templates\worldstore\product_detail.html:139
+#: .\worldstore\templates\worldstore\search_by_products.html:41
+#: .\worldstore\templates\worldstore\search_by_products_of_category.html:46
+#: .\worldstore\templates\worldstore\search_by_products_of_category.html:71
+msgid "сум"
+msgstr "so’m"
+
+#: .\worldstore\templates\worldstore\components\_profile_create.html:46
+msgid "Средства связи"
+msgstr "Bog’lanish vositasi"
+
+#: .\worldstore\templates\worldstore\components\_profile_create.html:61
+#: .\worldstore\templates\worldstore\new_product.html:117
+#: .\worldstore\templates\worldstore\online_shop_detail.html:171
+#: .\worldstore\templates\worldstore\online_shop_detail.html:178
+msgid "Сохранить изменения"
+msgstr "O’zgarishlarni saqlash"
+
+#: .\worldstore\templates\worldstore\components\_reviews.html:3
+#: .\worldstore\templates\worldstore\components\_tabs-pills.html:14
+msgid "Отзывы"
+msgstr "Izohlar"
+
+#: .\worldstore\templates\worldstore\components\_reviews.html:24
+#: .\worldstore\templates\worldstore\components\_reviews.html:29
+msgid "Все комментарии"
+msgstr "Izohlar"
+
+#: .\worldstore\templates\worldstore\components\_reviews.html:27
+#: .\worldstore\templates\worldstore\online_shop_detail.html:185
+msgid "Оставить отзыв"
+msgstr "Izoh qoldirish"
+
+#: .\worldstore\templates\worldstore\components\_shop_card.html:19
+msgid "Владелец пока не добавил"
+msgstr "Do’kon egasi hozircha tavsif joylagani yo’q"
+
+#: .\worldstore\templates\worldstore\components\_shop_card.html:21
+msgid "описание"
+msgstr "tavsif"
+
+#: .\worldstore\templates\worldstore\components\_shop_first_pane.html:12
+msgid "Добавте обьявления"
+msgstr "E’lon qo’shing"
+
+#: .\worldstore\templates\worldstore\components\_tabs-pills.html:4
+msgid "Обьявления"
+msgstr "E'lonlar"
+
+#: .\worldstore\templates\worldstore\login_registration.html:34
+#: .\worldstore\templates\worldstore\login_registration.html:67
+msgid "Войти"
+msgstr "Kirish"
+
+#: .\worldstore\templates\worldstore\login_registration.html:37
+msgid "Регистрация"
+msgstr "Ro’yhatdan o’tish"
+
+#: .\worldstore\templates\worldstore\login_registration.html:47
+msgid "Введите свое имя"
+msgstr "Ismingizni kiriting"
+
+#: .\worldstore\templates\worldstore\login_registration.html:55
+#: .\worldstore\templates\worldstore\login_registration.html:80
+msgid "Ваш email"
+msgstr "Email"
+
+#: .\worldstore\templates\worldstore\login_registration.html:63
+msgid "Введите пароль"
+msgstr "Parolni kiriting"
+
+#: .\worldstore\templates\worldstore\login_registration.html:86
+msgid "Введите надежный пароль для своего аккаунта"
+msgstr "Sahifangiz uchun ishonchli bo’lgan parolni kiriting"
+
+#: .\worldstore\templates\worldstore\login_registration.html:93
+msgid "Повторите пароль"
+msgstr "Parolni qaytaring"
+
+#: .\worldstore\templates\worldstore\login_registration.html:96
+msgid "Зарегистрироваться"
+msgstr "Ro’yhatdan o’tish"
+
+#: .\worldstore\templates\worldstore\new_product.html:101
+msgid "Ваш номер"
+msgstr "Telefon raqamingiz"
+
+#: .\worldstore\templates\worldstore\new_product.html:108
+msgid "Опишите доставку"
+msgstr "Yetkazib berish usulini tasvirlash"
+
+#: .\worldstore\templates\worldstore\new_product.html:119
+msgid "Активировать"
+msgstr "Faollashtirish"
+
+#: .\worldstore\templates\worldstore\online_shop_detail.html:46
+#: .\worldstore\templates\worldstore\online_shop_detail.html:57
+msgid "Изменить"
+msgstr "O’zgartirish"
+
+#: .\worldstore\templates\worldstore\online_shop_detail.html:54
+#: .\worldstore\templates\worldstore\online_shop_detail.html:76
+msgid "Геолокация"
+msgstr "Geolokatsiya"
+
+#: .\worldstore\templates\worldstore\online_shop_detail.html:69
+#: .\worldstore\templates\worldstore\online_shop_detail.html:80
+msgid "В магазине"
+msgstr "Do’konda"
+
+#: .\worldstore\templates\worldstore\online_shop_detail.html:69
+msgid "пока нет описания"
+msgstr "hozircha tavsif yo’q"
+
+#: .\worldstore\templates\worldstore\online_shop_detail.html:80
+msgid "пока нет геолокации"
+msgstr "hozircha geolokatsiya yo’q"
+
+#: .\worldstore\templates\worldstore\online_shop_detail.html:169
+msgid "Добавьте геолокацию"
+msgstr "Geolokatsiyani qo’shing"
+
+#: .\worldstore\templates\worldstore\online_shop_detail.html:183
+msgid "Ваш отзыв"
+msgstr "Izohingiz"
+
+#: .\worldstore\templates\worldstore\onlineshop_by_category.html:22
+#: .\worldstore\templates\worldstore\onlineshop_by_region_&_category.html:22
+msgid "Онлайн магазины"
+msgstr "Online do’konlar"
+
+#: .\worldstore\templates\worldstore\onlineshop_by_category.html:32
+msgid "В данной категории пока нет магазинов"
+msgstr "Bu turkumda hali do‘konlar yo‘q"
+
+#: .\worldstore\templates\worldstore\onlineshop_by_region_&_category.html:32
+msgid "В данном регионе пока нет магазинов"
+msgstr "Ushbu tumanda hozircha do’kon yo’q"
+
+#: .\worldstore\templates\worldstore\product_detail.html:135
+msgid "Связаться"
+msgstr "Bog’lanish"
+
+#: .\worldstore\templates\worldstore\product_detail.html:138
+msgid "Цена"
+msgstr "Narx"
+
+#: .\worldstore\templates\worldstore\product_detail.html:144
+msgid "Доставка"
+msgstr "Yetkazib berish"
+
+#: .\worldstore\templates\worldstore\product_detail.html:155
+msgid "Удалить"
+msgstr "O’chirish"
+
+#: .\worldstore\templates\worldstore\product_detail.html:163
+msgid "Все ваши обьявления"
+msgstr "Sizning barcha e’lonlaringiz"
+
+#: .\worldstore\templates\worldstore\product_detail.html:165
+msgid "Все обьявления продавца"
+msgstr "Sotuvchining barcha e’lonlari"
+
+#: .\worldstore\templates\worldstore\product_detail.html:170
+msgid "В этом магазине пока нет других товаров"
+msgstr "Bu do’konda hali mahsulotlar yo’q"
+
+#: .\worldstore\templates\worldstore\product_detail.html:176
+msgid "Вас также могут заинтересовать:"
+msgstr "Sizni qiziqtishi mumkin:"
+
+#: .\worldstore\templates\worldstore\product_detail.html:187
+msgid "Пока нет рекамендованных магазинов"
+msgstr "Hozircha tavsiya qilingan do’konlar yo’q"
+
+#: .\worldstore\templates\worldstore\product_detail.html:203
+msgid "Вы действитьно хотите удалить товар"
+msgstr "Siz haqiqatan ham mahsulotni o’chirishni xohlaysizmi"
+
+#: .\worldstore\templates\worldstore\product_detail.html:205
+msgid "Да, удалить"
+msgstr "Ha, o’chirish"
+
+#: .\worldstore\templates\worldstore\search.html:11
+#: .\worldstore\templates\worldstore\search_by_online_shops.html:22
+#: .\worldstore\templates\worldstore\search_by_products.html:18
+#: .\worldstore\templates\worldstore\search_by_products_of_category.html:22
+msgid "По вашему запросу найдено:"
+msgstr "Sizning so'rovingiz bo'yicha topildi:"
+
+#: .\worldstore\templates\worldstore\search.html:168
+#: .\worldstore\templates\worldstore\search_by_online_shops.html:179
+#: .\worldstore\templates\worldstore\search_by_products.html:47
+#: .\worldstore\templates\worldstore\search_by_products_of_category.html:78
+msgid "Не найдено публикаций по вашему запросу"
+msgstr "So‘rovingiz bo‘yicha hech qanday nashr topilmadi"
+
+#: .\worldstore\templates\worldstore\search.html:168
+#: .\worldstore\templates\worldstore\search_by_online_shops.html:179
+#: .\worldstore\templates\worldstore\search_by_products.html:47
+#: .\worldstore\templates\worldstore\search_by_products_of_category.html:78
+msgid "Попробуйте повторить запрос с другой формулировкой"
+msgstr "So'rovni boshqa so'z bilan takrorlashga harakat qiling"
+
+#: .\worldstore\templates\worldstore\top_shops.html:16
+msgid "Топ объявления"
+msgstr "Top e’lonlar"
+
+#: .\worldstore\templates\worldstore\top_shops.html:26
+msgid "В этом регионе пока нет топовых магазинов"
+msgstr "Bu tumanda hali eng yaxsyhi do’konlar yo’q"
+
+#: .\worldstore\views.py:93
+#, python-brace-format
+msgid "Категория: {category.title}"
+msgstr "Kategoriya: {category.title}"
+
+#: .\worldstore\views.py:122
+#, python-brace-format
+msgid "Регион: {region.region}"
+msgstr "Tuman: {region.region}"
+
+#: .\worldstore\views.py:358
+#, python-brace-format
+msgid "Продукт: {product.title}"
+msgstr "Mahsulot: {product.title}"
+
+#: .\worldstore\views.py:401
+msgid "Создание магазина"
+msgstr "Do’kon yaratish"
+
+#: .\worldstore\views.py:427
+msgid "Обновление магазина"
+msgstr "Do’konni yangilash"
+
+#: .\worldstore\views.py:468 .\worldstore\views.py:524
+msgid "Вы можете загружать до 5 картинок, загрузите меньше картинок"
+msgstr "Siz 5 tagacha rasm yuklashingiz mumkin, kamroq rasm yuklang"
+
+#: .\worldstore\views.py:472
+#, python-brace-format
+msgid ""
+"Товар с названием {title} уже существует в вашем магазине. Используйте "
+"другое название"
+msgstr "{title} nomli mahsulot sizning do’koningizda bor. Boshqa nomdan foydalaning."
+
+#: .\worldstore\views.py:481
+msgid "Создание продукта"
+msgstr "Mahsulot yaratish"
+
+#: .\worldstore\views.py:528
+#, python-brace-format
+msgid ""
+"Товар с названием {product.title} уже существует в вашем магазине. "
+"Используйте другое название"
+msgstr "{product.title} nomli mahsulot sizning do’koningizda bor. Boshqa nomdan foydalaning."
+
+#: .\worldstore\views.py:539
+#, python-brace-format
+msgid "Изменение продукта {product.title}"
+msgstr "Mahsulotni o’zgartirish {product.title}"
+
+#: .\worldstore\views.py:581
+#, python-brace-format
+msgid ""
+"{request.user.username}, у вас уже есть описание магазина {online_shop."
+"title}. Но вы можете его изменить"
+msgstr "{request.user.username}, Sizda {online_shop."
+"title} do’konining tavsifi bor. Lekin siz uni o’zgartirishingiz mumkin "
+
+#: .\worldstore\views.py:656
+#, python-brace-format
+msgid "Вы уже оставляли отзыв у магазина {online_shop.title}"
+msgstr "Siz {online_shop.title} do’koni haqida izoh qoldirgansiz"
+
+#: .\worldstore\views.py:918
+msgid "Войти или зарегистрироваться"
+msgstr "Kirish yoki ro’yhatdan o’tish"
+
+#: .\worldstore\views.py:928
+msgid "Отлично! Вы прошли регисрацию! Теперь можете авторизоваться"
+msgstr "Yaxshi! Siz ro'yxatdan o'tdingiz! Endi siz tizimga kirishingiz mumkin"
+
+#: .\worldstore\views.py:931
+msgid ""
+"Пароль не должен быть слишком похож на другую вашу личную информацию.\n"
+"Ваш пароль должен содержать как минимум 8 символов.\n"
+"Пароль не должен быть слишком простым и распространенным.\n"
+"Пароль не может состоять только из цифр."
+msgstr "Parol boshqa shaxsiy ma'lumotlaringizga juda o'xshash bo'lmasligi kerak.\n Sizning parolingiz kamida 8 ta belgidan iborat boʻlishi kerak\n Parol juda oddiy va keng tarqalgan bo'lmasligi kerak.\n Parol raqamlardan iborat bo'lishi mumkin emas."
+
+
+#: .\worldstore\views.py:994
+msgid "Не верно имя пользователя или пароль"
+msgstr "Foydalanuvchi nomi yoki paroli noto’g’ri"
