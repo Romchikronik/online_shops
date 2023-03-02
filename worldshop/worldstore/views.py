@@ -1132,6 +1132,22 @@ def user_logout(request):
 # import account.views
 
 
+from allauth.socialaccount.models import SocialAccount
+
+def google_callback(request):
+    try:
+        social_user = SocialAccount.objects.get(provider='google', user=request.user.id)
+    except SocialAccount.DoesNotExist:
+        social_user = None
+
+    if social_user:
+        # User is logged in via Google account
+        return redirect('/')
+    else:
+        # User is not logged in via Google account
+        return redirect('login_registration')
+
+
 # class LoginView(account.views.LoginView):
 #     form_class = account.forms.LoginEmailForm
 #

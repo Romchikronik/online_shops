@@ -1,4 +1,5 @@
 {% extends 'index.html' %}
+{% load socialaccount %}
 {% load static %}
 {% load i18n %}
 
@@ -52,7 +53,10 @@
 <!--<a href="{% url 'account_login' %}">Login with email</a>-->
 {% endcomment %}
 <a href="{% url 'telegram-auth-callback' %}">Login with Telegram</a>
-{% comment %}<a href="{% provider_login_url 'google' %}">Login with Google</a> {% endcomment %}
+<a href="{% provider_login_url 'google' %}">Login with Google</a>
+
+
+<!--<a href="{% url 'socialaccount_signup' %}">Login with Google</a>-->
 
 <div class="login-registration">
 

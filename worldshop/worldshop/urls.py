@@ -19,6 +19,9 @@ from django.urls import path, include
 from worldshop import settings
 from django.conf.urls.static import static
 
+from allauth.account.views import LogoutView
+from allauth.socialaccount import views as social_views
+
 # from account.views import PasswordResetTokenView
 
 # from allauth.account.views import LoginView, LogoutView
@@ -34,7 +37,9 @@ urlpatterns += i18n_patterns(                         # для мультияз�
     path('', include('worldstore.urls')),
     path('', include('favorites.urls')),
 
-    # path('accounts/', include('allauth.urls')),
+    path('accounts/', include('allauth.urls')),
+    path('accounts/logout/', LogoutView.as_view(), name='logout'),
+    path('accounts/social/signup/', social_views.signup, name='socialaccount_signup'),
     # path('login/', LoginView.as_view(), name='account_login'),
     # path('logout/', LogoutView.as_view(), name='account_logout'),
     prefix_default_language=False

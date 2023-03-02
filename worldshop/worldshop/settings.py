@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'worldstore.templatetags.filter',
     'django_filters',
 
+    # 'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -397,19 +398,36 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',# для email
 ]
 
-SITE_ID = 1
+# online-shops-379306  - project_id
+
+# SITE_ID = 1
+
+# SOCIALACCOUNT_PROVIDERS = {
+#     'google': {
+#         'SCOPE': [
+#             'profile',
+#             'email',
+#         ],
+#         'AUTH_PARAMS': {
+#             'access_type': 'online',
+#         }
+#     }
+# }
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
-        'SCOPE': [
-            'profile',
-            'email',
-        ],
+        'SCOPE': ['profile', 'email'],
         'AUTH_PARAMS': {
-            'access_type': 'online',
+            'prompt': 'select_account',
+        },
+        'APP': {
+            'client_id': '885682059406-btcqtsof13lt0rhfpcjkfnmu17p9jjvs.apps.googleusercontent.com',  # из консоли ID
+            'secret': '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',  # из консоли secret
+            'key': ''
         }
     }
 }
+
 
 # AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend',
 #                            'allauth.account.auth_backends.AuthenticationBackend',]
