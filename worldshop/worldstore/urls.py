@@ -9,6 +9,7 @@ urlpatterns = [
 
     path('telegram-auth-callback/', telegram_auth_callback, name='telegram-auth-callback'),
     # path('google-callback/', google_callback, name='google-callback'),
+    path('accounts/google/login/callback/', google_callback, name='google_callback'),
 
     # re_path(r"^account/login/$", LoginView.as_view(), name="account_login"),
     # re_path(r"^account/signup/$", SignupView.as_view(), name="account_signup"),
